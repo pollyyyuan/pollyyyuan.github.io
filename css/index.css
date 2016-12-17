@@ -1,149 +1,145 @@
-.layout{
-	max-width: 75%;
-	margin:0 auto;
-}
 /*头部*/
-body{
+header{
 	position: relative;
 	width: 100%;
-/*	height: 100%;*/
+	background: #D6433B url(../img/bg.png);
+	overflow: hidden;
 }
-.header-box{
-	position: fixed;
-	height: 40px;
-	padding:15px 0;
-	width: 100%;
-	font-family: "Space Mono", Helvetica, Arial, sans-serif;
-	color: #fff;
-	z-index: 1000;
-}
-.header-box-active{
-	background:#D6433B url(../img/bg.png) ;
-}
-.header-box .layout{
-	height: 100%;
+
+.layout{
+	width: 75%;
+	margin: 0 auto;
 	position: relative;
 }
 .logo{
-	position: absolute;
-	top:0;
-	left:10px;
-	font-size:20px;
-	line-height: 40px;
-}
-.logo a{
-	color: #fff;
-}
-.logo a:hover{
-	color: rgba(255,255,255,.9);
-	text-shadow: 2px 2px 1px rgba(255,255,255,.5);
-}
-.header-box .con{
-	float: right;
-	padding-right: 20px;
-	font-size: 18px;
-	line-height: 40px;
-	display: none;
-}
-.slide-btn{
 	position: fixed;
-	right:110px;
-	cursor: pointer;
-	color:#fff;
-	height: 24px;
-	width: 24px;
-	border:1px solid #fff;
-	border-radius: 50%;
-	text-align: center;
-	font-size: 24px;
-	display: inline-block;
-	top:500px;
-	z-index: 1001;
-	transition: all 1s;
-}
-.slide-btn:hover{
-	border-color: #843733;
-	color: #843733;
-}
-/*主页展示区*/
-.show-box{
-	position: relative;
 	width: 100%;
+	background: transparent;
+}
+.logo-box a{
+	color: #fff;
+	font-size: 20px;
+	font-family: 'microsoft yahei';
+	padding-left: 10px;
+}
+.logo-box a:hover{
+	color:  rgba(0,0,0,.3);
+}
+.logo-box{
+	width: 75%;
+	height: 40px;
+	padding: 10px 0;
+}
+.logo-active{
+	background: #D6433B url(../img/bg.png);
+}
+.show-box{
+	width: 100%;	
+	padding-top:60px;
 	height: 540px;
-	color:#fff;
-	padding-top: 70px;
-	overflow: hidden;
-	background:#D6433B url(../img/bg.png) ;
 	transition: all 1s;
 }
 .show-active{
-	height: 0;
+	height: 70px;
 }
-/*导航栏*/
-.nav{
-	position: relative;
-	height: 100px;
-	width: 70%;
-	margin:0 10%;
-	font:14px/14px "microsoft yahei";
-	overflow: hidden;
+#welcome{
+	width: 100%;
+	padding: 65px 0;
 }
-.nav-active{
+#welcome .row{
+	text-align: center;
+	padding: 40px 0;
+	font-family: 'microsoft yahei';
+}
+.row.info1{
+	font-size: 40px;
+	color: #fff;
+}
+.row.info2{
+	font-size: 24px;
+	color: #333;
+}
+/*向上按钮*/
+.slide-btn{
 	position: fixed;
+	top:540px;
+	right: 110px;
+	width: 24px;
+	height: 24px;
+	border:1px solid #fff;
+	border-radius: 50%;
+	transition: top .5s;
+	cursor: pointer;
 }
-.nav li{
+.slide-down::before,.slide-up::before{
+	color: #fff;
+	line-height: 24px;	
+	position: absolute;
+	left:4px;
+}
+.slide-up::before{
+	content:'\ea3a';
+}
+.slide-down::before{
+	content: '\ea3e';
+}
+.slide-btn:hover{
+	border-color: rgba(0,0,0,.3);
+}
+.slide-down:hover::before,.slide-up:hover::before{
+	color: rgba(0,0,0,.3);
+}
+/*nav导航*/
+#mainNav{
+	height: 80px;
+	font:14px/14px 'microsoft yahei';
+	width: 100%;
+}
+#mainNav li{
 	float: left;
+	overflow: hidden;
 	width: 25%;
 	text-align: center;
-}
-.nav a{
-	display: inline-block;
-	margin-top:30px; 
-}
-.nav a:hover{
-	color:#D6433B;
-	margin-top: 31px;
-}
-/*项目列表*/
-.section{
-	margin:130px 30px;
-	position: relative;
-}
-.pero{
-	width: 45%;
-	border:1px solid #E5E5E5;
-	border-radius: 4px;
-}
-.pero li{
-	height: 34px;
-	line-height: 33px;
-	padding-left: 10px;
-	position: relative;
-}
-.pero li.pero-title{
-	background-color: #FAFAFA;
-	color: #333;
-}
-.pero li+li::after{
-	content:'';
-	position: absolute;
-	top:0;
-	left:0;
-	right:0;
-	margin-top: -1px;
-	height: 1px;
-	background-color: #E5e5e5;
-}
-.pero a.pero-github{
-	font-size: 14px;
 	font-weight: 700;
-	color: #333;
 }
-.pero a:hover{
+#mainNav a{
+	display: inline-block;
+	margin-top:27px;
+}
+#mainNav i::before{
+	font-size: 12px;
+	margin-right: 3px;
+}
+i.nav-aboutMe::before{
+	content:'\e9cd';
+}
+i.nav-repo::before{
+	content:'\e926';
+}
+i.nav-blog::before{
+	content:'\e907';
+}
+i.nav-search::before{
+	content:'\e986';
+}
+#mainNav a:hover,#mainNav .nav-active{
 	color: #D6433B;
+	margin-top: 28px;
 }
-.pero .pero-show{
-	position: absolute;
-	top:0;
-	right: 20px;
+
+/*字体*/
+[icon]{
+	font-family: 'basicfont' !important;
+ 	speak: none;
+  	font-style: normal;
+  	font-weight: normal;
+  	font-variant: normal;
+ 	text-transform: none;
+  	line-height: 1;
+ 	-webkit-font-smoothing: antialiased;
+ 	-moz-osx-font-smoothing: grayscale;
+}
+
+section{
+	height: 1000px;
 }

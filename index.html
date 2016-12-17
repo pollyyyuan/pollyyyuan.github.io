@@ -1,97 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" id="pol">
+<head id="headDom">
 	<meta charset="UTF-8">
-	<title>pol-Yuan</title>
-	<meta name="Description" content="polly的个人网站">
-	<meta name="KeyWords" content="web前端,github">
-	<link rel="shortcut icon" href="pol.ico">
+	<title>pol-yuan</title>
+	<link rel="shutcut icon" href="pol.ico">
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/welcome.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<!-- 头部 -->
-		<div class="header-box" id="headerBox">
+	<header id="header">
+		<div class="logo">
 			<div class="layout">
-				<div class="logo"><a href="#">pol-Yuan</a></div>
-				<div class="con" >My name is polly Yuan.&nbsp;Welcome!!!</div>
+				<div class="logo-box"><a href="#">pol-Yuan</a></div>
 			</div>
 		</div>
-		
-		<!-- 主页展示盒子 -->
-		<div class="show-box" id="showBox" >
+		<div class="show-box">
 			<div class="layout">
-				<div id="show">
 				<div id="welcome">
-					<div class="info-title row">
-						My name is polly Yuan
-					</div>
-					<div class="info-dec row">
-						我叫袁野，欢迎来到我的个人网站
-					</div>
-					<div class="end row">
-						以上
-					</div>
+					<p class="row info1">My name is polly Yuan</p>
+					<p class="row info2">欢迎来到袁野的个人网站</p>
 				</div>
 			</div>
 		</div>
-		</div>
-		<a class="slide-btn" id="slideBtn"></a>	
-	<!-- 导航栏 -->
-		<div class="nav layout" id="nav">
-			<li><a href="#">关于我</a> </li>
-			<li><a href="#">项目列表</a> </li>
-			<li><a href="#">随笔</a> </li>
-			<li><a href="#">搜索</a> </li>
-		</div>
-	<!-- 列表块盒子 -->
-	<div class="layout">
-	<div class="section pero ">
-		<ul>
-			<li class="pero-title">
-				<h5>项目列表</h5>
-			</li>
-			<li>
-				<a href="#" class="pero-github">exmpale</a>
-				<div class="pero-show"></div>
-			</li>
-			<li>
-				<a href="#" class="pero-github">exmpale</a>
-				<div class="pero-show"></div>
-			</li>
+	</header>
+	<a class="slide-btn slide-up" icon ></a>
+	<nav id="mainNav">
+		<ul class="layout">
+			<li><a href="#" class="nav-active"><i icon class="nav-aboutMe"></i><span>关于我</span></a></li>
+			<li><a href="#" ><i icon class="nav-repo"></i><span>项目清单</span></a></li>
+			<li><a href="#" ><i icon class="nav-blog"></i><span>随笔</span></a></li>
+			<li><a href="#" ><i icon class="nav-search"></i><span>搜索</span></a></li>
 		</ul>
-	</div>
-	</div>
+	</nav>
+	<section></section>
 </body>
-</html>
 <script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/index.js"></script>
 <script>
-	$(function(){
-		var slideHeader=function(e){
-			var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
-                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
-        		// 向上滚
-    		if (delta > 0) {
-        		$('#showBox').removeClass('show-active');
-      			$('#headerBox').removeClass('header-box-active')
-      							.find('.con').hide();
-      			$('#nav').removeClass('nav-active');
-        		$('#slideBtn').css('top','500px');
-        		$(document).scrollTop(0);
-   			} 
-       		 // 向下滚
-   			 else if (delta < 0) {
-        		$('#showBox').addClass('show-active');
-      			$('#headerBox').addClass('header-box-active')
-      							.find('.con').addClass('');
-      			$('#nav').addClass('nav-active');
-        		$('#slideBtn').css('top','17px');
-    		} 
+	function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+	}
+	function width(){
+		if(document.compatMode==='CSS|compat')
+		{
+			return {
+				width:document.documentElement.clientWidth,
+				height:docuemnt.documentElement.clientHeight
+			}
 		}
-		$(document).on("mousewheel DOMMouseScroll ", slideHeader);
-		$('#slideBtn').on("click",function(){
-
-					});
-	})
+		else if(window.innerWidth!=null)
+		{
+			return{
+				width:window.innerWidth,
+				height:window.innerHeight
+			}
+		}
+		return{
+			width:document.body.clientWidth,
+			height:document.body.clientHeight
+		}
+	}
+	var htmlDom=document.getElementById('pol'),
+		headDom=document.getElementById('headDom');
+	console.log(width().width);
+	if(IsPC()||width().width>640)
+	{
+		var scriptDom=document.createElement('script');
+		scriptDom.src='js/pcIndex.js';
+		htmlDom.appendChild(scriptDom);
+	}
+	else{
+		var linkDom=document.createElement('link');
+		linkDom.rel='stylesheet';
+		linkDom.href='css/mindex.css';
+		headDom.appendChild(linkDom);
+	}
 </script>
+</html>

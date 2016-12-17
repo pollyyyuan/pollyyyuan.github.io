@@ -9,10 +9,6 @@ select, input, textarea { margin:0; }
 textarea { resize:none; } /*防止拖动*/
 img {border:0;	vertical-align:middle; }  /*  去掉图片低测默认的3像素空白缝隙*/
 table { border-collapse:collapse; }
-body {
-    font-family: 'Brandon Grotesque', 'brandon-grotesque', sans-serif;
- 	font-size:10px;
-}
 .clearfix:before,.clearfix:after {
     content:"";
     display:table;
@@ -21,6 +17,17 @@ body {
 .clearfix{
     *zoom:1;/*IE/7/6*/
 }
-a {text-decoration:none; color: #58585A;}
+a {text-decoration:none; color: #111;}
 h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:100%;}
 s,i,em{font-style:normal;text-decoration:none;}
+/*字体图标*/
+@font-face {
+  font-family: 'basicfont';
+  src:  url('../fonts/icomoon.eot?xma7yi');
+  src:  url('../fonts/icomoon.eot?xma7yi#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?xma7yi') format('truetype'),
+    url('../fonts/icomoon.woff?xma7yi') format('woff'),
+    url('../fonts/icomoon.svg?xma7yi#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
