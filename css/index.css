@@ -16,19 +16,31 @@ header{
 	width: 100%;
 	background: transparent;
 }
+.logo-box{
+	width: 75%;
+	height: 40px;
+	padding: 10px 0;
+}
 .logo-box a{
+	position: absolute;
 	color: #fff;
-	font-size: 20px;
 	font-family: 'microsoft yahei';
+	font-size: 20px;
 	padding-left: 10px;
 }
 .logo-box a:hover{
 	color:  rgba(0,0,0,.3);
 }
-.logo-box{
-	width: 75%;
-	height: 40px;
-	padding: 10px 0;
+.logo-box .info{
+	/* display: inline-block; */
+	overflow:hidden;
+	min-width: 100px;
+	float: right;
+	color: #fff;
+	font-size: 18px;
+	font-family: 'microsoft yahei';
+	padding-right: 10px;
+	display: none;
 }
 .logo-active{
 	background: #D6433B url(../img/bg.png);
@@ -98,7 +110,7 @@ header{
 #mainNav li{
 	float: left;
 	overflow: hidden;
-	width: 25%;
+	width: 33.33%;
 	text-align: center;
 	font-weight: 700;
 }
