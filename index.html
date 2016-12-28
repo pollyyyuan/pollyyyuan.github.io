@@ -7,6 +7,26 @@
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/index.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+	function IsPC() {
+   		 var userAgentInfo = navigator.userAgent;
+   		 var Agents = ["Android", "iPhone",
+   		             "SymbianOS", "Windows Phone",
+   		             "iPad", "iPod"];
+   		 var flag = true;
+   		 for (var v = 0; v < Agents.length; v++) {
+   		     if (userAgentInfo.indexOf(Agents[v]) > 0) {
+   		         flag = false;
+   		         break;
+   		     }
+   		 }
+    	return flag;
+	}
+	if(!IsPC())
+	{
+		loaction.href('www.pol-yuan.com/polm');
+	}
+	</script>
 </head>
 <body>
 	<!-- 头部 -->
@@ -41,20 +61,7 @@
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/index.js"></script>
 <script>
-	function IsPC() {
-    var userAgentInfo = navigator.userAgent;
-    var Agents = ["Android", "iPhone",
-                "SymbianOS", "Windows Phone",
-                "iPad", "iPod"];
-    var flag = true;
-    for (var v = 0; v < Agents.length; v++) {
-        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-            flag = false;
-            break;
-        }
-    }
-    return flag;
-	}
+
 	function width(){
 		if(document.compatMode==='CSS|compat')
 		{
