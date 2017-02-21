@@ -1,102 +1,93 @@
 <!DOCTYPE html>
-<html lang="en" id="pol">
-<head id="headDom">
+<html lang="en">
+<head>
 	<meta charset="UTF-8">
-	<title>pol-yuan</title>
-	<link rel="shutcut icon" href="pol.ico">
-	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/index.css">
+	<title>polly的个人简历</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script>
-	function IsPC() {
-   		 var userAgentInfo = navigator.userAgent;
-   		 console.log(userAgentInfo);
-   		 var Agents = ["Android", "iPhone",
-   		             "SymbianOS", "Windows Phone",
-   		             "iPad", "iPod"];
-   		 var flag = true;
-   		 for (var v = 0; v < Agents.length; v++) {
-   		     if (userAgentInfo.indexOf(Agents[v]) > 0) {
-   		         flag = false;
-   		         break;
-   		     }
-   		 }
-    	return flag;
-	}
-	if(!IsPC())
-	{
-		window.location.href='polm';
-	}
-	</script>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<!-- 头部 -->
-	<header id="header">
-		<div class="logo">
-			<div class="layout">
-				<div class="logo-box">
-					<a href="#">pol-Yuan</a>
-					<span class="info">My name is polly! welcome!!!</span>
+	<a class="logo" href="#" id="logo">POL-YUAN</a>
+	<ul class="nav">
+		<li><a href="#">基本介绍</a></li>
+		<li><a href="#">专业技能</a></li>
+		<li><a href="#">项目经验</a></li>
+		<li><a href="#">联系我</a></li>
+	</ul>
+	<div class="contain">
+		<div class="pages" id="pages">	
+			<div class="page first" id="firstPage">
+				<div class="logo" id="logo">POL-YUAN</div>
+				<span class="txt-info about-me">about Me</span>
+				<span class="txt-info">袁野&个人简历</span>
+				<i class="line"></i>
+				<div class="bgc"></div>
+			</div>
+			<div class="page" id="page1">
+				<div class="section box1">
+					<div class="icon-photo">
+						<img src="img/icon_photo.jpg" alt="">
+					</div> 
+				</div>
+				<ul class="section box2">
+					<li><span class="ed">姓名</span>&nbsp;|&nbsp;袁野</li>
+					<li><span class="ed">手机</span>&nbsp;|&nbsp;15062204163</li>
+					<li><span class="ed">邮箱</span>&nbsp;|&nbsp;polly_yyuan@163.com<li>
+					<li><span class="ed">gitHub</span>&nbsp;|&nbsp;https://github.com/pollyyyuan</li>
+				</ul>
+				<ul class="section box3">
+					<li>web前端实习生</li>
+					<li class="ed">人不任性，枉少年！</li>
+					<li>我是一个性格活泼开朗，爱好前端的妹纸。</li>
+					<li>作为应届生，希望寻得一份web前端实习生的岗位。如果与贵公司有缘分，就请速速收了我吧！</li>
+				</ul>
+			</div>
+			<div class="page" id="page2">
+				<div class="section box1">
+					<h1 class="txt-h">专业技能</h1>
+				</div>
+				<div class="section box2">
+					<p>
+						<span>CSS3</span>
+						<span>SCSS</span>
+					</p><p>
+						<span>jQuery</span>
+						<span class="small">JavaScript</span>
+						<span>Zepto</span>
+					</p><p>
+						<span>c/c++</span>
+						<span>SQL Server</span>
+					</p><p>
+						<span>HTML5</span>
+						<span>PhotoShop</span>
+						<span>Bootstrap</span>
+					</p>
+				</div>
+				<div class="section box3">
+					<p>能使用语义化的HTML和模块化CSS编写符合W3C、兼容主流浏览器的网页</p>
+					<p>熟悉原生JavaScript语言,可以脱离框架编码</p>
+					<p>熟练使用HTML5和CSS3,实现响应式布局</p>
+					<p>熟悉使用jQuery、Zepto框架,可以封装jQuery插件</p>
+					<p>熟悉scss等css预处理工具</p>
+					<p>了解Ajax工作原理,以及JSON前后端交互技术</p>
+					<p>有良好的编码习惯</p>
+					<p>熟悉c/c++语言,对服务器开发有一定的了解</p>
 				</div>
 			</div>
-		</div>
-		<div class="show-box">
-			<div class="layout">
-				<div id="welcome">
-					<p class="row info1">My name is polly Yuan</p>
-					<p class="row info2">欢迎来到袁野的个人网站</p>
-				</div>
+			<div class="page">
+				
 			</div>
 		</div>
-	</header>
-	<a class="slide-btn slide-up" icon ></a>
-	<nav id="mainNav">
-		<ul class="layout">
-			<li><a href="#" class="nav-active"><i icon class="nav-aboutMe"></i><span>关于我</span></a></li>
-			<li><a href="#" ><i icon class="nav-repo"></i><span>项目清单</span></a></li>
-			<li><a href="#" ><i icon class="nav-blog"></i><span>随笔</span></a></li>
-		</ul>
-	</nav>
-	<section></section>
+	</div>
+	<div class="dots" id="dots">
+	</div>
 </body>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/index.js"></script>
+<script src="index.js"></script>
 <script>
+	var pages=document.getElementById('pages');
+	var dots=document.getElementById('dots');
 
-	function width(){
-		if(document.compatMode==='CSS|compat')
-		{
-			return {
-				width:document.documentElement.clientWidth,
-				height:docuemnt.documentElement.clientHeight
-			}
-		}
-		else if(window.innerWidth!=null)
-		{
-			return{
-				width:window.innerWidth,
-				height:window.innerHeight
-			}
-		}
-		return{
-			width:document.body.clientWidth,
-			height:document.body.clientHeight
-		}
-	}
-	var htmlDom=document.getElementById('pol'),
-		headDom=document.getElementById('headDom');
-	console.log(width().width);
-	if(IsPC()||width().width>640)
-	{
-		var scriptDom=document.createElement('script');
-		scriptDom.src='js/pcIndex.js';
-		htmlDom.appendChild(scriptDom);
-	}
-	else{
-		var linkDom=document.createElement('link');
-		linkDom.rel='stylesheet';
-		linkDom.href='css/mindex.css';
-		headDom.appendChild(linkDom);
-	}
+	var fullpage=new Fullpage(pages,dots);
+	fullpage.init();
 </script>
 </html>
