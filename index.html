@@ -2,22 +2,27 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>polly的个人简历</title>
+	<title>pol-yuan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="allDom">
 	<a class="logo" href="#" id="logo">POL-YUAN</a>
-	<ul class="nav">
-		<li><a href="#">基本介绍</a></li>
-		<li><a href="#">专业技能</a></li>
-		<li><a href="#">项目经验</a></li>
-		<li><a href="#">联系我</a></li>
-	</ul>
-	<div class="contain">
+	<div class="nav-box">
+		<div class="nav-btn" id="navBtn">	
+			<i class="icon-menu"></i>
+			<ul class="nav">
+				<li><a href="#">基本介绍</a></li>
+				<li><a href="#">专业技能</a></li>
+				<li><a href="#">项目经验</a></li>
+				<li><a href="#">联系我</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="contain current" id="contain">
 		<div class="pages" id="pages">	
-			<div class="page first" id="firstPage">
-				<div class="logo" id="logo">POL-YUAN</div>
+			<div class="page" id="page0">
+				<div class="logo" >POL-YUAN</div>
 				<span class="txt-info about-me">about Me</span>
 				<span class="txt-info">袁野&个人简历</span>
 				<i class="line"></i>
@@ -30,13 +35,13 @@
 					</div> 
 				</div>
 				<ul class="section box2">
-					<li><span class="ed">姓名</span>&nbsp;|&nbsp;袁野</li>
-					<li><span class="ed">手机</span>&nbsp;|&nbsp;15062204163</li>
-					<li><span class="ed">邮箱</span>&nbsp;|&nbsp;polly_yyuan@163.com<li>
-					<li><span class="ed">gitHub</span>&nbsp;|&nbsp;https://github.com/pollyyyuan</li>
+					<li><span class="ed">姓名</span>&nbsp;&nbsp;|&nbsp;&nbsp;袁野</li>
+					<li><span class="ed">生日</span>&nbsp;&nbsp;|&nbsp;&nbsp;1995.6</li>
+					<li><span class="ed">学校</span>&nbsp;&nbsp;|&nbsp;&nbsp;南京工程学院<li>
+					<li><span class="ed">专业</span>&nbsp;&nbsp;|&nbsp;&nbsp;软件工程专业</li>
 				</ul>
 				<ul class="section box3">
-					<li>web前端实习生</li>
+					<li>求职:web前端实习生</li>
 					<li class="ed">人不任性，枉少年！</li>
 					<li>我是一个性格活泼开朗，爱好前端的妹纸。</li>
 					<li>作为应届生，希望寻得一份web前端实习生的岗位。如果与贵公司有缘分，就请速速收了我吧！</li>
@@ -74,8 +79,83 @@
 					<p>熟悉c/c++语言,对服务器开发有一定的了解</p>
 				</div>
 			</div>
-			<div class="page">
-				
+			<div class="page" id="page3">
+				<div class="section box1">
+					<h1 class="txt-h">项目经验</h1>
+				</div>
+				<ul class="section box2">
+					<li class="floor left">	
+						<div class="box">
+							<h class="h">百度前端学院--任务管理系统</h>
+							<div>				
+								<div class="img-box">
+									<img src="img/task1.png" alt="">
+								</div>
+								<div class="info-box">								
+									<p class="info ed">未使用任何框架，原生JS编写</p>
+									<p class="info">采用localStorage储存json，实现类别、任务集、任务的增删改查操作。分栏之间良好交互。</p>
+								</div>
+							</div>
+							<a href="#" class="gh-pages"><i class="icon-a"></i>链接</a>
+							<a href="#" class="github"><i class="icon-code"></i>源码</a>
+						</div>
+						<div class="box">
+							<h class="h">个人网站--个人简历</h>
+							<div>				
+								<div class="img-box">
+									<img src="img/task1.png" alt="">
+								</div>
+								<div class="info-box">								
+									<p class="info ed">原生JS编写,响应式布局，兼容pc和移动端</p>
+									<p class="info">使用GitHub Pages创建静态个人简历,绑定域名,欢迎访问</p>								
+								</div>
+							</div>
+							<a href="#" class="gh-pages"><i class="icon-a"></i>链接</a>
+							<a href="#" class="github"><i class="icon-code"></i>源码</a>
+						</div>
+					</li>
+					<li class="floor right">
+						<div class="box ">
+							<h class="h">百度Web前端学院</h>
+							<div>
+								<div class="img-box">
+									<img src="img/task3.fw.png" alt="">
+								</div>
+								<div class="info-box">								
+									<p class="info ">task1:实现博客页面展示</p>
+									<p class="info">task2:实现倒计时框、输入框既是提示、<span class="ed">拓展交互</span>等效果</p>
+								</div>
+							</div>
+							<a href="#" class="gh-pages"><i class="icon-a"></i>链接</a>
+							<a href="#" class="github"><i class="icon-code"></i>源码</a>
+						</div>
+						<div class="box">
+							<h class="h">3d轮播demo</h>
+							<div>	
+								<div class="img-box">
+									<img src="img/task4.png" alt="">
+								</div>
+								<div class="info-box">								
+									<p class="info">封装成jQuery插件,用于pc端</p>
+									<p class="info ">效果酷炫,实现自动播放,节点hover变换等特效</p>
+								</div>
+							</div>
+							<a href="#" class="gh-pages"><i class="icon-a"></i>链接</a>
+							<a href="#" class="github"><i class="icon-code"></i>源码</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="page" id="page4">
+				<div class="section box1">
+					<h1 class="txt-h">联系我</h1>
+					<p>Email:<a href="#">polly_yyuan@163.com</a></p>
+					<p>phone:<a href="#">15062204163</a></p>
+					<div class="icon-box">
+						<a href="www.github.com/pollyyyuan"><i class="icon-github"></i></a>
+						<a href="#"><i class="icon-weibo"></i></a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,10 +164,7 @@
 </body>
 <script src="index.js"></script>
 <script>
-	var pages=document.getElementById('pages');
-	var dots=document.getElementById('dots');
-
-	var fullpage=new Fullpage(pages,dots);
+	var fullpage=new Fullpage();
 	fullpage.init();
 </script>
 </html>
