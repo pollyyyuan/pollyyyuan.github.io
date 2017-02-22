@@ -224,7 +224,6 @@ body{
 	width: 43%;
 	padding-top: 17%;
 	text-align: center;
-	font-size: 1.8em;
 }
 #page2 .box2 span{
 	background-color: rgba(58,50,38,.6);
@@ -311,8 +310,6 @@ body{
 	margin:0 auto;
 	padding-top: 20%;
 	text-align: center;
-}
-#page4 .txt-h{
 	font-size: 2em;
 }
 #page4 p{
@@ -345,6 +342,10 @@ body{
 		font-size: 4.7em;
 		letter-spacing: 30px;
 	}
+	.page .section{
+		font-size: 1.7em;
+		line-height: 1.8em;
+	}
 	#page1 .section{
 		padding-top: 5%;
 		width: 40%;
@@ -370,9 +371,19 @@ body{
 		padding-top: 1%;
 		padding-left: 2%;
 	}
+	#page3 .box .h{
+		font-size: .9em;
+	}
+	#page3 .box p.info{
+		font-size: .8em;
+	}
+	#page3 .box a{
+		font-size: .6em;
+	}
 }
 @media (max-width:800px){
 	.logo{
+		top:15px;
 		color: #fff;
 	}
 	.dots{
@@ -404,6 +415,14 @@ body{
 		font-size: 4.3em;
 		letter-spacing: 25px;
 	}	
+	#page1 .section,#page2 .section,#page3 .section,#page4 .section{
+		font-size: 1.4em;
+		line-height: 1.7em;
+	}
+	#page1 .box1,#page2 .box1,#page3 .box1,#page4 .txt-h{
+		font-size: 1.8em;
+		line-height: 2em;
+	}
 	#page1 .section{
 		width: 80%;
 		padding-top: 5%;
@@ -420,7 +439,7 @@ body{
 	#page2 .box1,#page3 .box1{
 		width: 100%;
 		padding-left: 0;
-		padding-top: 8%;
+		padding-top: 12%;
 		text-align: center;
 	}
 	#page2 .box2{
