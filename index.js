@@ -183,7 +183,16 @@ var Fullpage=(function(){
 					me.next();
 				}
           	}; 
-          	touchEvent.swipeUp(document,scrollFn);
+          	touchEvent.swipeUp(document,function(){
+          		if(me.lastIndex<(me.pageNum-1)){
+          			me.next();
+          		}
+          	});
+          	touchEvent.swipeDown(document,function(){
+          		if(me.lastIndex>0){
+          			me.prve();
+          		}  		
+          	});
           	/*绑定窗口改变事件*/
 				/*为了不频繁调用resize的回调方法，做了延迟*/
 			var resizeId;
@@ -330,5 +339,36 @@ var touchEvent={
 			  }
 		  }
 		}, false );	
-	}		
+	},
+		/*向下滑动事件*/
+		swipeDown:function(element,fn){
+			var isTouchMove, startTx, startTy;
+			element.addEventListener( 'touchstart', function( e ){
+			  var touches = e.touches[0];
+			  startTx = touches.clientX;
+			  startTy = touches.clientY;
+			  isTouchMove = false;
+			}, false );
+			element.addEventListener( 'touchmove', function( e ){
+			  isTouchMove = true;
+			  e.preventDefault();
+			}, false );
+			element.addEventListener( 'touchend', function( e ){
+			  if( !isTouchMove ){
+				return;
+			  }
+			  var touches = e.changedTouches[0],
+				endTx = touches.clientX,
+				endTy = touches.clientY,
+				distanceX = startTx - endTx
+				distanceY = startTy - endTy,
+				isSwipe = false;
+			  if( Math.abs(distanceX) < Math.abs(distanceY) ){
+				  if( distanceY < -20  ){
+					  fn();       
+					  isSwipe = true;
+				  }
+			  }
+			}, false );	
+		}	
 }
