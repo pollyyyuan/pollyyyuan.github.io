@@ -53,6 +53,10 @@ body,html{
 .nav-btn i::before{
 	font-size: 26px;
 	color: #08192d;
+	transition: color .3s;
+}
+.nav-active i::before{
+	color: #fff;
 }
 .nav-btn .nav{
 	position: absolute;
@@ -65,8 +69,11 @@ body,html{
 	font-size: 1.6em;
 	line-height: 2em;
 }
-.nav-btn .nav li a{
+.nav  a{
 	color: #08192d;
+}
+.nav a.active{
+	color: #d6433b;
 }
 .logo,.nav-btn,.dots{
 	transition: opacity 1s;
@@ -139,15 +146,15 @@ body{
 	background-color: #d6433b;
 }
 .section{
-	font-size: 1.6em;
-	line-height: 2em;
+	font-size: 1.8em;
+	line-height: 1.9em;
 	color: #fff;
 }
 /*page0*/
 #page0{
 	background-color: #fff;
 }
-#page0 .logo{
+#page0 .logo1{
 	position: absolute;
 	opacity: 1;
 	color: #d6433b;
@@ -235,7 +242,8 @@ body{
 	width: 5%;
 	color: #F4DFC2;
 }
-#page2 .box1 .txt-h,#page3 .box1 .txt-h{
+#page2 .box1 .txt-h,#page3 .box1 .txt-h,#page4 .box1 .txt-h{
+	color: #F4DFC2;
 	font-weight: 700;
 	text-shadow: 2px 2px 1px rgba(241,148,131,.6);
 }
@@ -304,6 +312,7 @@ body{
 #page3 .box .h{
 	font-size: 1em;
 	line-height: 2em;
+	font-weight: 700;
 }
 #page3 .box .info{
 	font-size: .9em;
@@ -317,7 +326,7 @@ body{
 	right: 5px;
 	top:0;
 	font-size: .7em;
-	color: #08192d;
+	color: #3a3226;
 }
 #page3 .box a.gh-pages{
 	right:55px;
@@ -326,7 +335,7 @@ body{
 #page4 .box1{
 	width: 80%;
 	margin:0 auto;
-	padding-top: 16%;
+	padding-top: 40%;
 	text-align: center;
 }
 #page4 .txt-h{
@@ -356,7 +365,7 @@ body{
 	}
 }
 @media (max-width: 1000px){
-	#page0 .logo{
+	#page0 .logo1{
 		font-size: 4.7em;
 		letter-spacing: 30px;
 	}
@@ -387,11 +396,45 @@ body{
 	}
 }
 @media (max-width:800px){
+	.logo{
+		color: #fff;
+	}
 	.nav-box{
 		width: 100%;
 	}
+	.nav-btn{
+		width: 20px;
+		height: 20px;
+	}
+	.nav-btn i::before{
+		font-size: 20px;
+		color: #3a3226;
+	}
 	.nav-btn .nav{
-		left:30px;
+		left:45px;
+	}
+	.nav-btn .nav li{
+		font-size: 1.2em;
+		line-height: 1.4em;
+	}
+	.nav a{
+		color: #3a3226;
+	}
+	.nav a.active{
+		color: #fff;
+	}
+	.dots{
+		right:10px;
+	}
+	.dots .dot{
+		width: 4px;
+		height: 4px;
+		border: 1px solid #fff;
+		background-color: #fff;
+	}
+	.dots .active{
+		border-color: #3a3226;
+		background-color: #3a3226;
 	}
  	.contain{
  		top:0;
@@ -403,7 +446,7 @@ body{
  	.current{
  		transform:translateX(-50%);
  	}
- 	#page0 .logo{
+ 	#page0 .logo1{
 		font-size: 4.3em;
 		letter-spacing: 25px;
 	}	
@@ -414,10 +457,16 @@ body{
 	}
 	#page1 .box1{
 		width: 100%;
+		padding-top: 16%;
 	}
 	#page1 .box1 .icon-photo{
 		width: 100px;
 		height: 100px;
+	}
+	#page2 .box1,#page3 .box1{
+		width: 100%;
+		padding-top: 14%;
+		text-align: center;
 	}
 	#page2 .box2{
 		display: none;
@@ -426,12 +475,12 @@ body{
 		width: 85%;
 		padding-left: 8%;
 	}
-	#page3 .box1,#page3 .box2{
-		width: 100%;
-		padding-top: 2%;
-	}
 	#page3 .box1{
-		text-align: center;
+		padding-left: 0;
+	}
+	#page3 .box2{
+		width: 95%;
+		padding-top: 2%;
 	}
 	#page3 .box2 .floor{
 		float: none;
@@ -452,19 +501,15 @@ body{
 	#page3 .box2 a:hover{
 		color: #fff;
 	}
-	.dots .active{
-		background-color: #08192d;
-		border-color: #08192d;
-	}
 }  
 @media (max-width: 500px){
-	#page0 .logo{
+	#page0 .logo1{
 		font-size: 4em;
 		letter-spacing: 20px;
 	}
 }
 @media (max-width: 400px){
-	#page0 .logo{
+	#page0 .logo1{
 		font-size: 3.5em;
 		letter-spacing: 13px;
 	}

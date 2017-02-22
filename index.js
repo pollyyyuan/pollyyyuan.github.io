@@ -91,6 +91,8 @@ var Fullpage=(function(){
 		this.pages=doming.contain.pages;
 		this.pageArr=doming.contain.pageArr;
 		this.dots=doming.dots.dots;
+		this.navBtn=doming.nav.navBtn;
+		this.navLi=doming.nav.navLi;
 		this.lastIndex=0;
 	}
 	Fullpage.prototype={
@@ -120,11 +122,17 @@ var Fullpage=(function(){
 				me.dotArr=$('.dot',me.dots,1);
 				doming.dots.dotArr=me.dotArr;
 				me.dotArr[0].setAttribute('class','dot active');
+				me.navLiArr=me.navLi.querySelectorAll('a');
+				me.navLiArr[0].setAttribute('class','active');
 			}
 		},
 		activeDot:function(){
 			$('.active',this.dots).setAttribute('class','dot');
 			this.dotArr[this.lastIndex].setAttribute('class','dot active');
+			if(this.lastIndex>0){
+				$('.active',this.navLi).removeAttribute('class');
+				this.navLiArr[this.lastIndex-1].setAttribute('class','active');
+			}
 		},	
 		prve : function(){
 			var me = this;
@@ -193,6 +201,19 @@ var Fullpage=(function(){
           			me.prve();
           		}  		
           	});
+          	touchEvent.tap(me.navBtn,function(){
+          		if(me.navLi.style.display=='block'){
+          			me.navBtn.setAttribute('class','nav-btn');
+          			me.navLi.style.display='none';
+          		}
+          		else{
+          			me.navBtn.setAttribute('class','nav-btn nav-active');
+          			me.navLi.style.display='block';
+          			touchEvent.tap(me.navLi,function(){
+          				me.navLi.style.display='block';
+          			})
+          		}
+          	});
           	/*绑定窗口改变事件*/
 				/*为了不频繁调用resize的回调方法，做了延迟*/
 			var resizeId;
@@ -206,15 +227,35 @@ var Fullpage=(function(){
 			me.pages.addEventListener("transitionend", function(){
 				me.canscroll = true;
 			});
-          	doming.nav.navBtn.addEventListener('mouseenter',function(){
-          		doming.nav.navLi.style.display='block';
-          		doming.nav.navLi.addEventListener('mouseenter',function(){
+          	me.navBtn.addEventListener('mouseenter',function(){
+          		me.navLi.style.display='block';
+          		this.setAttribute('class','nav-btn nav-active');
+          		me.navLi.addEventListener('mouseenter',function(){
           			this.style.display='block';
+
           		});
           	});
-          	doming.nav.navBtn.addEventListener('mouseout',function(){
-          		doming.nav.navLi.style.display='none';
+          	me.navBtn.addEventListener('mouseout',function(){
+          		this.setAttribute('class','nav-btn');
+          		me.navLi.style.display='none';
           	});
+          	for(var navli=0;navli<me.navLiArr.length;navli++){
+          		var li=me.navLiArr[navli];
+          		li.addEventListener('click',function(){
+          			var index=this.getAttribute('data-index');
+          			me.lastIndex=index;
+          			CallPage(me.lastIndex,index);
+					me.move();
+					me.activeDot(me.lastIndex);
+          		});
+     //      		touchEvent.tap(li,function(){
+     //      			var index=this.getAttribute('data-index');
+     //      			me.lastIndex=index;
+     //      			CallPage(me.lastIndex,index);
+					// me.move();
+					// me.activeDot(me.lastIndex);
+     //      		});
+          	}
 		},
 		move:function(){
 			var me = this;
