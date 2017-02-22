@@ -223,7 +223,7 @@ var CallPage=function(index,context){//1是下，0是上
 		doming.logo.style.opacity=doming.logo.style.opacity==1?0:1;
 		doming.dots.dots.style.opacity=doming.dots.dots.style.opacity==1?0:1;
 	}
-	var arr=index?doming.contain['page'+index].pageArr():0,
+	var arr=index>0?doming.contain['page'+index].pageArr():0,
 		context=context?doming.contain['page'+context].pageArr():0;
 	var text=new Text(arr,context);
 	if(arr){
@@ -231,9 +231,7 @@ var CallPage=function(index,context){//1是下，0是上
 	}
 	if(context){
 		text.hide();
-	}
-	
-		
+	}		
 }
 var Text=(function(){
 	function Text(dom,context){
