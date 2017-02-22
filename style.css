@@ -343,8 +343,8 @@ body{
 		letter-spacing: 30px;
 	}
 	.page .section{
-		font-size: 1.8em;
-		line-height: 1.9em;
+		font-size: 1.7em;
+		line-height: 1.8em;
 	}
 	#page1 .section{
 		padding-top: 5%;
@@ -416,7 +416,7 @@ body{
 		letter-spacing: 25px;
 	}	
 	#page1 .section,#page2 .section,#page3 .section,#page4 .section{
-		font-size: 1.4em;
+		font-size: 1.6em;
 		line-height: 1.7em;
 	}
 	#page1 .box1,#page2 .box1,#page3 .box1,#page4 .txt-h{
@@ -471,6 +471,10 @@ body{
 	}
 }  
 @media (max-width: 500px){
+	#page1 .section,#page2 .section,#page3 .section,#page4 .section{
+		font-size: 1.5em;
+		line-height: 1.6em;
+	}
 	#page0 .logo1{
 		font-size: 4em;
 		letter-spacing: 20px;
