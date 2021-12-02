@@ -47,14 +47,14 @@
 							<div class="leave-container">
 								<div class="label">出发</div>
 								<div class="input-container">
-									<input type="text" />
+									<input type="text" id="editLeave"/>
 								</div>
 							</div>
 							<div class="divide-line"></div>
 							<div class="arrive-container">
 								<div class="label">到达</div>
 								<div class="input-container">
-									<input type="text" />
+									<input type="text" id="editArrive"/>
 								</div>
 							</div>
 						</section>
@@ -65,38 +65,42 @@
 										<div class="col"></div>
 										<div class="col">(报销)</div>
 										<div class="col">(实际)</div>
+										<div class="col close-col"></div>
 									</div>
 								</li>
-								<li>
+								<!-- <li>
 									<div class="row">
 										<div class="col">
-											<div class="input-container">
+											<div class="input-container vehicle">
 												<input type="text">
 											</div>
 										</div>
 										<div class="col">
-											<div class="input-container number">
+											<div class="input-container number official">
 												<input type="text">
 											</div>
 										</div>
 										<div class="col">
-											<div class="input-container number">
+											<div class="input-container number total">
 												<input type="text">
 											</div>
+										</div>
+										<div class="col close-col">
+											<a><i class="iconfont icon-close-circle-fill"></i></a>
 										</div>
 									</div>
-								</li>
+								</li> -->
 							</ul>
-							<a class="btn add-btn"><i class="iconfont icon-plus"></i></a>
+							<a class="btn add-btn" id="trafficAddBtn"><i class="iconfont icon-plus"></i></a>
 						</section>
 					</div>
 					<div class="card stay-card">
 						<div class="row">
 							<div class="label">酒店：</div>
 							<div class="tag-group">
-								<div class="tag selected">汉庭</div>
+								<!-- <div class="tag selected">汉庭</div>
 								<div class="tag">全季</div>
-								<div class="tag">橘子</div>
+								<div class="tag">橘子</div> -->
 								<div class="tag input-container">
 									<input type="text" placeholder="自定义">
 								</div>

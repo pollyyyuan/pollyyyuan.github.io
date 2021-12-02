@@ -96,7 +96,7 @@ html, body {
   font-size: 13px;
 }
 
-.section{
+.section {
   margin-bottom: 10px;
 }
 
@@ -355,7 +355,11 @@ html, body {
   color: #fff;
 }
 
-.edit-layout .detail-section .head-li .col {
+.edit-layout .detail-section li:not(.head-li) {
+  margin-bottom: 2px;
+}
+
+.edit-layout .detail-section .head-li .col:not(.close-col) {
   line-height: 26px;
   text-align: right;
   padding-right: 10px;
@@ -364,6 +368,25 @@ html, body {
 
 .edit-layout .detail-section .col {
   padding: 0 2px;
+}
+
+.edit-layout .detail-section .close-col {
+  flex: 0 0 26px;
+  text-align: center;
+}
+
+.edit-layout .detail-section .close-col a {
+  color: #F0D87D;
+  line-height: 36px;
+  transition: all 0.3s;
+}
+
+.edit-layout .detail-section .close-col .iconfont {
+  font-size: 22px;
+}
+
+.edit-layout .detail-section .close-col a:active {
+  color: #B29B45;
 }
 
 .edit-layout .detail-section .add-btn {
@@ -396,7 +419,7 @@ html, body {
 .edit-layout .stay-card .tag-group {
   display: flex;
   flex-wrap: wrap;
-  height: 36px;
+  line-height: 36px;
 }
 
 .edit-layout .tag-group .tag {
@@ -409,9 +432,10 @@ html, body {
   background-color: #676767;
   color: #272727;
   font-size: 15px;
+  transition: all 0.3s;
 }
 
-.edit-layout .tag-group .tag.selected {
+.edit-layout .tag-group .tag.selected,.edit-layout .tag-group .tag:not(.input-container):active{
   background-color: #F0D87D;
 }
 
