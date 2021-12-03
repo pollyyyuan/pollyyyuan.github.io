@@ -10,6 +10,16 @@ var Edit = (function() {
 
     this.headLiTemplate = '<li class="head-li"><div class="row"><div class="col"></div><div class="col">(报销)</div><div class="col">(实际)</div><div class="col close-col"></div></div></li>';
 
+    //绑定DOM
+    this.bindDom();
+    // 绑定事件
+    this.bindEvent();
+
+    // 初始化数据
+    this.currentTab = '交通';
+    this.switchTab();
+
+    this.getHotelList();
   }
   Edit.prototype = {
     // 初始化
@@ -17,22 +27,10 @@ var Edit = (function() {
       this.home = home;
       this._editPopup = editPopup;
 
-      //绑定DOM
-      this.bindDom();
-      // 绑定事件
-      this.bindEvent();
-      // 初始化数据
-
       this.date = date || this.today;
       this.setDateShow();
 
-      this.currentTab = '交通';
-      this.switchTab();
-
-      this.getHotelList();
-
       this.initData();
-
     },
     //绑定DOM
     bindDom: function() {
@@ -76,6 +74,8 @@ var Edit = (function() {
       this._editSaveBtn1 = _Dom.$('#editSaveBtn1');
       this._editDelBtn = _Dom.$('#editDelBtn');
 
+      this._hotelInput = _Dom.$('.input-container input', this._editHotelGroup)[0];
+
     },
     //绑定事件
     bindEvent: function() {
@@ -115,6 +115,9 @@ var Edit = (function() {
       });
       this._editDelBtn.addEventListener('click', function() {
         me.del();
+      });
+      this._hotelInput.addEventListener('blur', function(_el) {
+        me.customHotel(_el.target.value);
       });
     },
     // 初始化数据
@@ -246,10 +249,7 @@ var Edit = (function() {
           }
         });
       }
-      this._hotelInput = _Dom.$('.input-container input', this._editHotelGroup)[0];
-      this._hotelInput.addEventListener('blur', function(_el) {
-        me.customHotel(_el.target.value);
-      });
+
     },
     // 新增酒店
     addHotel: function(val, state) {

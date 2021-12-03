@@ -34,7 +34,7 @@ var Home = (function() {
     ];
 
     this.edit = new Edit();
-    
+
   }
   Home.prototype = {
     // 初始化
@@ -78,6 +78,19 @@ var Home = (function() {
     //绑定事件
     bindEvent: function() {
       var me = this;
+      document.addEventListener('touchstart', function(event) {
+        if (event.touches.length > 1) {
+          event.preventDefault();
+        }
+      });
+      var lastTouchEnd = 0;
+      document.addEventListener('touched', function(event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
       this._homeAddBtn.addEventListener('click', function() {
         me.openEdit();
       });

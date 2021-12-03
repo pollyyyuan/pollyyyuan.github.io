@@ -464,6 +464,7 @@ html, body {
   /* Safari */
   position: sticky;
   top: 0;
+  z-index: 999;
 }
 
 .edit-layout .tab-group .tab-container {
