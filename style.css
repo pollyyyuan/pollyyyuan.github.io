@@ -69,6 +69,7 @@ html, body {
   width: 100%;
   height: 100%;
   font-size: 14px;
+  font-family: 'Arial';
   color: #1D1D1D;
 }
 
@@ -100,9 +101,8 @@ html, body {
 }
 
 .btn-small {
-  height: 26px;
-  line-height: 26px;
-  font-size: 13px;
+  height: 30px;
+  line-height: 30px;
 }
 
 .section {
@@ -173,7 +173,7 @@ html, body {
 
 .home-layout .header .add-btn {
   position: absolute;
-  top: 13px;
+  top: 10px;
   right: 10px;
   background-color: #B29B45;
   color: #1D1D1D;
@@ -197,12 +197,13 @@ html, body {
 .home-layout .tool-group .icon-btn {
   width: 38px;
   height: 36px;
+  line-height: 36px;
   text-align: center;
-  background-color: #676767;
+  background-color: #323235;
 }
 
 .home-layout .tool-group .icon-btn i {
-  color: #272727;
+  color: #fff;
   font-size: 22px;
   font-weight: 700;
 }
@@ -217,10 +218,11 @@ html, body {
   color: #fff;
   font-size: 16px;
   letter-spacing: 1.4px;
+  font-weight: 700;
 }
 
 .home-layout .calendar-container {
-  background-color: #676767;
+  background-color: rgba(103, 103, 103, 0.31);
   border-radius: 6px;
   margin: 0 10px;
   padding: 8px;
@@ -243,7 +245,7 @@ html, body {
 }
 
 .home-layout .calendar-container .weekend-row .weekend {
-  color: #818181;
+  color: #B7B0B0;
 }
 
 .home-layout .calendar-container .weekend-row .holiday {
@@ -294,7 +296,7 @@ html, body {
 }
 
 .home-layout .total-container {
-  padding-bottom: 20px;
+  padding: 0 10px 20px;
 }
 
 .home-layout .total-section .title-group {
@@ -349,8 +351,8 @@ html, body {
 }
 
 .home-layout .footer {
-  height: 38px;
-  line-height: 38px;
+  height: 40px;
+  line-height: 40px;
   font-size: 15px;
   color: #fff;
   background-color: #343434;
@@ -385,14 +387,14 @@ html, body {
 .edit-layout .header .close-btn {
   position: absolute;
   left: 10px;
-  top: 4px;
+  top: 6px;
   color: #F5F5F5;
   text-align: center;
   margin: auto 0;
 }
 
 .edit-layout .header .close-btn i {
-  font-size: 22px;
+  font-size: 26px;
 }
 
 .edit-layout .header .close-btn:active {
@@ -403,7 +405,7 @@ html, body {
   position: absolute;
   top: 9px;
   right: 10px;
-  background-color: #272727;
+  background-color: #323235;
   color: #fff;
   width: 70px;
 }
@@ -629,8 +631,8 @@ html, body {
 
 .edit-layout .footer .btn {
   flex: 1;
-  height: 30px;
-  line-height: 30px;
+  height: 32px;
+  line-height: 32px;
   margin: 0 5px;
 }
 
