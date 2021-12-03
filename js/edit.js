@@ -47,6 +47,8 @@ var Edit = (function() {
 
       this._work = _Dom.$('#editWork'); // 事务
 
+      this._editContainer = _Dom.$('#editContainer');
+
       this._editTabGroup = _Dom.$('#editTabGroup');
       this._editTabs = _Dom.$('.tab', this._editTabGroup);
 
@@ -74,8 +76,7 @@ var Edit = (function() {
       this._editSaveBtn1 = _Dom.$('#editSaveBtn1');
       this._editDelBtn = _Dom.$('#editDelBtn');
 
-      this._hotelInput = _Dom.$('.input-container input', this._editHotelGroup)[0];
-
+      this._trafficCard = _Dom.$('#trafficCard');
     },
     //绑定事件
     bindEvent: function() {
@@ -115,9 +116,6 @@ var Edit = (function() {
       });
       this._editDelBtn.addEventListener('click', function() {
         me.del();
-      });
-      this._hotelInput.addEventListener('blur', function(_el) {
-        me.customHotel(_el.target.value);
       });
     },
     // 初始化数据
@@ -186,6 +184,26 @@ var Edit = (function() {
         var _el = this._editTabs[i];
         if (_el.innerHTML === this.currentTab) {
           _Dom.addClass(_el, 'selected');
+          var id = '';
+          switch (this.currentTab) {
+            case '交通':
+              id = 'trafficCard';
+              break;
+            case '住宿':
+              id = 'stayCard';
+              break;
+            case '花销':
+              id = 'costCard';
+              break;
+          }
+          console.log(id);
+          var dom = _Dom.$('#' + id);
+          _Dom.addClass(dom,'href');
+          window.setTimeout(function() {
+            _Dom.delClass(dom,'href');
+          }, 100)
+
+
         } else {
           _Dom.delClass(_el, 'selected');
         }
@@ -250,6 +268,10 @@ var Edit = (function() {
         });
       }
 
+      this._hotelInput = _Dom.$('.input-container input', this._editHotelGroup)[0];
+      this._hotelInput.addEventListener('blur', function(_el) {
+        me.customHotel(_el.target.value);
+      });
     },
     // 新增酒店
     addHotel: function(val, state) {
@@ -396,6 +418,7 @@ var Edit = (function() {
       params.contrast = Number(params.official) - Number(params.total);
       console.log('存储参数>>>>', params);
       Data.saveData(params);
+      Data.addBasicHotel(this.hotelList);
       if (state === 'add') {
         this.date = _Dom.calDate(new Date(this.date), 1);
         this.initData('init');

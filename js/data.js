@@ -67,8 +67,8 @@ var Data = {
     }
   },
   // 基础资料-酒店-新增
-  addBasicHotel: function() {
-    var list = ['汉庭', '全季', '橘子'];
+  addBasicHotel: function(list) {
+    list = list || ['汉庭', '全季', '橘子'];
     this.save('_limemo_basic_hotel', list);
   },
   // 基础资料-交通-获取
