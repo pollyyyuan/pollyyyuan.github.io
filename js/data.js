@@ -3,9 +3,12 @@
 /* 数据结构：
  *  key ：关键字（_limemo）+ "_" + @表名 + "_" + @月份
  *  _limemo_data_@月份 // 数据
- *  {
+ *  [{
  *    date: @日期,
  *    work: @事务,
+ *    official: @总报销金额,
+ *    total: @总实际金额,
+ *    contrast: @总对比,
  *    traffic: { // 交通
  *      leave: @出发地,
  *      arrive: @到达地,
@@ -30,7 +33,7 @@
  *         contrast:@对比
  *      }]
  *    },
- *  }
+ *  }]
  *  _limemo_basic_hotel // 酒店基础资料
  *  [
  *    @酒店名称
@@ -58,8 +61,10 @@ var Data = {
     var list = this.get('_limemo_basic_hotel');
     if (!list) {
       this.addBasicHotel();
+      this.getBasicHotel();
+    } else {
+      return list || [];
     }
-    return list || [];
   },
   // 基础资料-酒店-新增
   addBasicHotel: function() {
@@ -74,23 +79,80 @@ var Data = {
   getBasicCost: function() {
 
   },
-  // 数据-获取默认列表
-  getDefaultDataList: function() {
-    var month = (new Date()).getMonth();
-    var dataList = this.get('_limemo_data_' + month);
-    if (dataList) {
-      return dataList;
-    } else {
-      return [];
+  // 天-获取-根据月份
+  getDayListByMonth: function(month) {
+    var list = this.get('_limemo_data_' + month);
+    var dayList = [];
+    for (var i = 0; i < list.length; i++) {
+      dayList.push(new Date(list[i].date).getDate());
     }
+    return dayList || [];
+  },
+  // 数据-获取-根据月份
+  getDataListByMonth: function(month) {
+    var list = this.get('_limemo_data_' + month);
+    return list || [];
   },
   // 数据-获取-根据日期
-  getDataByDate: function(date) {
-
+  getDataListByDate: function(date) {
+    var result = {};
+    var month = new Date(date).getMonth() + 1;
+    var list = this.getDataListByMonth(month);
+    if (list.length > 0) {
+      var idx = list.findIndex(function(find) {
+        return find.date === date;
+      });
+      if (idx > -1) {
+        result = list[idx];
+      }
+    }
+    return result;
   },
   // 数据-存储
-  saveDataList: function(data) {
-
+  saveData: function(data) {
+    var month = new Date(data.date).getMonth() + 1;
+    var list = this.getDataListByMonth(month);
+    if (list.length > 0) {
+      var idx = list.findIndex(function(find) {
+        return find.date === data.date;
+      });
+      if (idx > -1) {
+        list.splice(idx, 1, data);
+      } else {
+        idx = 0;
+        for (var i = 0; i < list.length; i++) {
+          var tmpMonth = new Date(list[i].date).getMonth() + 1;
+          if (month < tmpMonth) {
+            idx = i;
+            break;
+          }
+        }
+        list.splice(idx, 0, data);
+      }
+      this.save('_limemo_data_' + month, list);
+    } else {
+      this.save('_limemo_data_' + month, [data]);
+    }
+  },
+  // 删除数据
+  delData: function(date) {
+    var month = new Date(date).getMonth() + 1;
+    var list = this.getDataListByMonth(month);
+    var tmp = this.getDataListByDate(date);
+    console.log(tmp);
+    if (tmp.date) {
+      var idx = list.findIndex(function(find) {
+        return find.date === date;
+      });
+      if (idx > -1) {
+        list.splice(idx, 1);
+        this.save('_limemo_data_' + month, list);
+      }
+    }
+  },
+  getCommon: function() {
+    var tmp = this.get('_limemo_common');
+    return tmp || {};
   },
   save: function(key, data) {
     localStorage[key] = JSON.stringify(data);

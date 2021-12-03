@@ -29,5 +29,27 @@ var _Dom = {
       newClass.splice(find, 1);
       el.className = newClass.join(' ');
     }
+  },
+  // 格式化日期
+  formatDate: function(date, format) {
+    date = new Date(date);
+    format = format || 'yyyy-MM-dd';
+    var pad = function(n) {
+      return n < 10 ? '0' + n : n;
+    };
+    return format
+      .replace('yyyy', date.getFullYear().toString())
+      .replace('MM', pad(date.getMonth() + 1))
+      .replace('dd', pad(date.getDate()))
+      .replace('HH', pad(date.getHours()))
+      .replace('mm', pad(date.getMinutes()))
+      .replace('ss', pad(date.getSeconds()));
+  },
+  // 计算日期
+  calDate: function(date, days, format) {
+    date = new Date(date);
+    var finalDate = date;
+    finalDate.setDate(finalDate.getDate() + days);
+    return this.formatDate(finalDate, format);
   }
 };

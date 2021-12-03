@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>小李备忘</title>
 	<link rel="stylesheet" href="./style.css">
@@ -15,6 +15,41 @@
 			<h1 class="title">小李备忘</h1>
 			<a class="btn btn-small add-btn" id="homeAddBtn">新增</a>
 		</header>
+		<div class="container">
+			<section class="section calendar-section">
+				<div class="tool-group">
+					<a class="btn icon-btn" id="homeSwitchDate1"><i class="iconfont icon-left"></i></a>
+					<a class="btn primary-btn" id="homeDate"></a>
+					<a class="btn icon-btn" id="homeSwitchDate2"><i class="iconfont icon-right"></i></a>
+				</div>
+				<div class="calendar-container" id="homeCalendar">
+					<div class="row weekend-row">
+					</div>
+					<div class="row content-row">
+					</div>
+				</div>
+			</section>
+			<section class="section total-section">
+				<div class="title-group">
+					<a class="btn title">统计</a>
+				</div>
+				<div class="total-container">
+					<ul id="homeTotalContainer">
+						<li class="head-li">
+							<div class="row">
+								<div class="col">日期</div>
+								<div class="col">报销</div>
+								<div class="col">实际</div>
+								<div class="col">对比</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+		<footer class="footer" id="homeFooter">
+
+		</footer>
 	</div>
 	<div class="popup" id="editPopup">
 		<!-- 编辑 -->
@@ -23,139 +58,142 @@
 				<a class="btn icon-btn close-btn" id="editCloseBtn"><i class="iconfont icon-close-circle-fill"></i></a>
 				<a class="btn btn-small save-btn" id="editSaveBtn">保存</a>
 			</header>
-			<section class="section date-section">
-				<a class="btn icon-btn" id="editSwitchDate1"><i class="iconfont icon-left"></i></a>
-				<a class="btn primary-btn" id="editDate"></a>
-				<a class="btn icon-btn" id="editSwitchDate2"><i class="iconfont icon-right"></i></a>
-			</section>
-			<section class="section title-section">
-				<div class="input-container">
-					<input type="text" placeholder="输入事务（建议 客户+描述）" id="editWork" />
-				</div>
-			</section>
-			<section class="section content-section">
-				<div class="tab-group">
-					<div class="tab-container" id="editTabGroup">
-						<div class="tab">交通</div>
-						<div class="tab">住宿</div>
-						<div class="tab">花销</div>
+			<div class="container">
+				<section class="section date-section">
+					<a class="btn icon-btn" id="editSwitchDate1"><i class="iconfont icon-left"></i></a>
+					<a class="btn primary-btn" id="editDate"></a>
+					<a class="btn icon-btn" id="editSwitchDate2"><i class="iconfont icon-right"></i></a>
+				</section>
+				<section class="section title-section">
+					<div class="input-container">
+						<input type="text" placeholder="输入事务（建议 客户+描述）" id="editWork" />
 					</div>
-				</div>
-				<div class="card-container" id="editCardContainer">
-					<div class="card traffic-card">
-						<section class="section address-section">
-							<div class="leave-container">
-								<div class="label">出发</div>
-								<div class="input-container">
-									<input type="text" id="editLeave"/>
+				</section>
+				<section class="section content-section">
+					<div class="tab-group">
+						<div class="tab-container" id="editTabGroup">
+							<a class="tab" href="#trafficCard">交通</a>
+							<a class="tab" href="#stayCard">住宿</a>
+							<a class="tab" href="#costCard">花销</a>
+						</div>
+					</div>
+					<div class="card-container" id="editCardContainer">
+						<div class="card traffic-card" id="trafficCard">
+							<section class="section address-section">
+								<div class="leave-container">
+									<div class="label">出发</div>
+									<div class="input-container">
+										<input type="text" id="editLeave" />
+									</div>
+								</div>
+								<div class="divide-line"></div>
+								<div class="arrive-container">
+									<div class="label">到达</div>
+									<div class="input-container">
+										<input type="text" id="editArrive" />
+									</div>
+								</div>
+							</section>
+							<section class="section detail-section">
+								<ul>
+									<li class="head-li">
+										<div class="row">
+											<div class="col"></div>
+											<div class="col">(报销)</div>
+											<div class="col">(实际)</div>
+											<div class="col close-col"></div>
+										</div>
+									</li>
+									<!-- <li>
+										<div class="row">
+											<div class="col">
+												<div class="input-container vehicle">
+													<input type="text">
+												</div>
+											</div>
+											<div class="col">
+												<div class="input-container number official">
+													<input type="text">
+												</div>
+											</div>
+											<div class="col">
+												<div class="input-container number total">
+													<input type="text">
+												</div>
+											</div>
+											<div class="col close-col">
+												<a><i class="iconfont icon-close-circle-fill"></i></a>
+											</div>
+										</div>
+									</li> -->
+								</ul>
+								<a class="btn add-btn" id="trafficAddBtn"><i class="iconfont icon-plus"></i></a>
+							</section>
+						</div>
+						<div class="card stay-card" id="stayCard">
+							<div class="row">
+								<div class="label">酒店：</div>
+								<div class="tag-group">
+									<!-- <div class="tag selected">汉庭</div>
+									<div class="tag">全季</div>
+									<div class="tag">橘子</div> -->
+									<div class="tag input-container">
+										<input type="text" placeholder="自定义">
+									</div>
 								</div>
 							</div>
-							<div class="divide-line"></div>
-							<div class="arrive-container">
-								<div class="label">到达</div>
-								<div class="input-container">
-									<input type="text" id="editArrive"/>
+							<div class="row">
+								<div class="label">报销：</div>
+								<div class="input-container number">
+									<input type="text" id="stayOfficial">
 								</div>
 							</div>
-						</section>
-						<section class="section detail-section">
-							<ul>
-								<li class="head-li">
-									<div class="row">
-										<div class="col"></div>
-										<div class="col">(报销)</div>
-										<div class="col">(实际)</div>
-										<div class="col close-col"></div>
-									</div>
-								</li>
-								<!-- <li>
-									<div class="row">
-										<div class="col">
-											<div class="input-container vehicle">
-												<input type="text">
-											</div>
-										</div>
-										<div class="col">
-											<div class="input-container number official">
-												<input type="text">
-											</div>
-										</div>
-										<div class="col">
-											<div class="input-container number total">
-												<input type="text">
-											</div>
-										</div>
-										<div class="col close-col">
-											<a><i class="iconfont icon-close-circle-fill"></i></a>
-										</div>
-									</div>
-								</li> -->
-							</ul>
-							<a class="btn add-btn" id="trafficAddBtn"><i class="iconfont icon-plus"></i></a>
-						</section>
-					</div>
-					<div class="card stay-card">
-						<div class="row">
-							<div class="label">酒店：</div>
-							<div class="tag-group">
-								<!-- <div class="tag selected">汉庭</div>
-								<div class="tag">全季</div>
-								<div class="tag">橘子</div> -->
-								<div class="tag input-container">
-									<input type="text" placeholder="自定义">
+							<div class="row">
+								<div class="label">实际：</div>
+								<div class="input-container number">
+									<input type="text" id="stayTotal">
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="label">报销：</div>
-							<div class="input-container number">
-								<input type="text">
-							</div>
-						</div>
-						<div class="row">
-							<div class="label">实际：</div>
-							<div class="input-container number">
-								<input type="text">
-							</div>
+						<div class="card cost-card" id="costCard">
+							<section class="section detail-section">
+								<ul>
+									<li class="head-li">
+										<div class="row">
+											<div class="col"></div>
+											<div class="col">(报销)</div>
+											<div class="col">(实际)</div>
+										</div>
+									</li>
+									<!-- <li>
+										<div class="row">
+											<div class="col">
+												<div class="input-container">
+													<input type="text">
+												</div>
+											</div>
+											<div class="col">
+												<div class="input-container number">
+													<input type="text">
+												</div>
+											</div>
+											<div class="col">
+												<div class="input-container number">
+													<input type="text">
+												</div>
+											</div>
+										</div>
+									</li> -->
+								</ul>
+								<a class="btn add-btn" id="costAddBtn"><i class="iconfont icon-plus"></i></a>
+							</section>
 						</div>
 					</div>
-					<div class="card cost-card">
-						<section class="section detail-section">
-							<ul>
-								<li class="head-li">
-									<div class="row">
-										<div class="col"></div>
-										<div class="col">(报销)</div>
-										<div class="col">(实际)</div>
-									</div>
-								</li>
-								<li>
-									<div class="row">
-										<div class="col">
-											<div class="input-container">
-												<input type="text">
-											</div>
-										</div>
-										<div class="col">
-											<div class="input-container number">
-												<input type="text">
-											</div>
-										</div>
-										<div class="col">
-											<div class="input-container number">
-												<input type="text">
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<a class="btn add-btn"><i class="iconfont icon-plus"></i></a>
-						</section>
-					</div>
-				</div>
-			</section>
+				</section>
+			</div>
 			<footer class="footer">
-				<a class="btn add-btn">保存并新增下一笔</a>
+				<a class="btn del-btn" id="editDelBtn">删除</a>
+				<a class="btn add-btn" id="editSaveBtn1">保存并新增下一笔</a>
 			</footer>
 		</layout>
 	</div>
