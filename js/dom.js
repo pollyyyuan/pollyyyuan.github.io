@@ -51,5 +51,10 @@ var _Dom = {
     var finalDate = date;
     finalDate.setDate(finalDate.getDate() + days);
     return this.formatDate(finalDate, format);
+  },
+  vibrate: function() {
+    if ('vibrate' in window.navigator) {
+      window.navigator.vibrate([200, 100, 200]);
+    } else {}
   }
 };

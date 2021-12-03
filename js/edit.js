@@ -157,6 +157,7 @@ var Edit = (function() {
       var me = this;
       _Dom.delClass(this._editPopup, 'show');
       window.setTimeout(function() {
+        _Dom.vibrate();
         me._editPopup.style.display = 'none';
         this.home.setCalendarSelected();
         this.home.getDataList();
