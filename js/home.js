@@ -32,6 +32,9 @@ var Home = (function() {
         value: '六'
       }
     ];
+
+    this.edit = new Edit();
+    
   }
   Home.prototype = {
     // 初始化
@@ -91,7 +94,6 @@ var Home = (function() {
       window.setTimeout(function() {
         _Dom.addClass(me._editPopup, 'show');
       }, 0);
-      this.edit = new Edit();
       this.edit.init(this, this._editPopup, date);
     },
     // 日历 START
