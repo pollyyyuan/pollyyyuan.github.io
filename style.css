@@ -559,7 +559,7 @@ html, body {
 }
 
 .edit-layout .detail-section li:not(.head-li) {
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .edit-layout .detail-section .head-li .col:not(.close-col) {
@@ -569,6 +569,10 @@ html, body {
   font-size: 12px;
 }
 
+.edit-layout .detail-section .row {
+  margin-bottom: 2px;
+}
+
 .edit-layout .detail-section .col {
   padding: 0 2px;
 }
@@ -576,12 +580,17 @@ html, body {
 .edit-layout .detail-section .close-col {
   flex: 0 0 26px;
   text-align: center;
+  position: relative;
 }
 
 .edit-layout .detail-section .close-col a {
   color: #F0D87D;
   line-height: 36px;
   transition: all 0.3s;
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .edit-layout .detail-section .close-col .iconfont {
@@ -682,3 +691,65 @@ html, body {
 }
 
 /* edit end */
+.tip-container {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* background: rgba(52, 52, 52, 0.5); */
+  padding: 0 16px;
+}
+
+.tip-container .tip {
+  margin: 0 auto;
+  height: 38px;
+  line-height: 38px;
+  padding: 0 20px;
+  border-radius: 6px;
+  animation: tipShow 1s;
+  transform: translateY(30px);
+  font-size: 16px;
+  color: #fff;
+}
+
+.tip-container .tip i {
+  font-size: 20px;
+  margin-right: 6px;
+  position: relative;
+  top: 1px;
+}
+
+.tip-container.success .tip {
+  background-color: #00C764;
+}
+
+.tip-container.del .tip {
+  background-color: #ff4d4f;
+}
+
+.tip-container.hide .tip {
+  opacity: 0;
+}
+
+@keyframes tipShow {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

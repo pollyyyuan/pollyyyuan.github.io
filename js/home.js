@@ -103,7 +103,7 @@ var Home = (function() {
     },
     openEdit: function(date) {
       var me = this;
-      this._editPopup.style.display = 'block';
+      _Dom.show(this._editPopup);
       window.setTimeout(function() {
         _Dom.addClass(me._editPopup, 'show');
       }, 0);

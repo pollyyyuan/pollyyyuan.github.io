@@ -54,10 +54,12 @@ var Edit = (function() {
 
       this._editCardContainer = _Dom.$('#editCardContainer');
       this._editCards = {
-        traffic: _Dom.$('.traffic-card ul', this._editCardContainer)[0],
+        traffic: _Dom.$('.traffic-card', this._editCardContainer)[0],
         stay: _Dom.$('.stay-card', this._editCardContainer)[0],
-        cost: _Dom.$('.cost-card ul', this._editCardContainer)[0]
+        cost: _Dom.$('.cost-card', this._editCardContainer)[0]
       };
+      this.trafficUl = _Dom.$('ul', this._editCards.traffic)[0];
+      this.costUl = _Dom.$('ul', this._editCards.cost)[0];
 
       this._leave = _Dom.$('#editLeave'); // 出发地
       this._arrive = _Dom.$('#editArrive'); // 到达地
@@ -103,9 +105,9 @@ var Edit = (function() {
         me.addTraffic();
       });
       for (var j = 0; j < this._inputs.length; j++) {
-        this._inputs[j].addEventListener('keyup', function() {
-          me.fresh();
-        });
+        // this._inputs[j].addEventListener('keyup', function() {
+        //   me.fresh();
+        // });
       }
       this._costAddBtn.addEventListener('click', function() {
         console.log('cost');
@@ -126,8 +128,8 @@ var Edit = (function() {
       this._arrive.value = state ? '' : (tmp.traffic ? (tmp.traffic.arrive || '') : '');
       this._stayOfficial.value = state ? '' : (tmp.stay ? (tmp.stay.official || '') : '');
       this._stayTotal.value = state ? '' : (tmp.stay ? (tmp.stay.total || '') : '');
-      this._editCards.traffic.innerHTML = this.headLiTemplate;
-      this._editCards.cost.innerHTML = this.headLiTemplate;
+      this.trafficUl.innerHTML = this.headLiTemplate;
+      this.costUl.innerHTML = this.headLiTemplate;
       if (state) {
         this.addTraffic();
         this.addCost();
@@ -159,7 +161,7 @@ var Edit = (function() {
       _Dom.delClass(this._editPopup, 'show');
       window.setTimeout(function() {
         _Dom.vibrate();
-        me._editPopup.style.display = 'none';
+        _Dom.hide(me._editPopup);
         this.home.setCalendarSelected();
         this.home.getDataList();
       }, 300);
@@ -180,30 +182,30 @@ var Edit = (function() {
     // 选中tab
     switchTab: function() {
       var me = this;
+      console.log(this.currentTab);
+      switch (this.currentTab) {
+        case '交通':
+          _Dom.show(this._editCards.traffic);
+          _Dom.hide(this._editCards.stay);
+          _Dom.hide(this._editCards.cost);
+          break;
+        case '住宿':
+          _Dom.hide(this._editCards.traffic);
+          _Dom.show(this._editCards.stay);
+          _Dom.hide(this._editCards.cost);
+          break;
+        case '花销':
+          _Dom.hide(this._editCards.traffic);
+          _Dom.hide(this._editCards.stay);
+          _Dom.show(this._editCards.cost);
+          break;
+        default:
+          break;
+      }
       for (var i = 0; i < this._editTabs.length; i++) {
         var _el = this._editTabs[i];
         if (_el.innerHTML === this.currentTab) {
           _Dom.addClass(_el, 'selected');
-          var id = '';
-          switch (this.currentTab) {
-            case '交通':
-              id = 'trafficCard';
-              break;
-            case '住宿':
-              id = 'stayCard';
-              break;
-            case '花销':
-              id = 'costCard';
-              break;
-          }
-          console.log(id);
-          var dom = _Dom.$('#' + id);
-          _Dom.addClass(dom,'href');
-          window.setTimeout(function() {
-            _Dom.delClass(dom,'href');
-          }, 100)
-
-
         } else {
           _Dom.delClass(_el, 'selected');
         }
@@ -217,14 +219,17 @@ var Edit = (function() {
       var me = this;
       var li = document.createElement('li');
       var str = '<div class="row">';
-      str += '<div class="col"><div class="input-container vehicle"><input type="text"' + (data ? (' value="' + data.vehicle + '"') : '') + '></div></div>';
+      str += '<div class="col"><div class="input-container vehicle"><input type="text" placeholder="交通工具"' + (data ? (' value="' + data.vehicle + '"') : '') + '></div></div>';
       str += '<div class="col"><div class="input-container number official"><input type="number"' + (data ? (' value="' + data.official + '"') : '') + '></div></div>';
       str += '<div class="col"><div class="input-container number total"><input type="number"' + (data ? (' value="' + data.total + '"') : '') + '></div></div>';
+      str += '<div class="col close-col"></div>';
+      str += '</div><div class="row">';
+      str += '<div class="col"><div class="input-container mark"><input type="text" placeholder="备注"' + (data ? (' value="' + data.mark + '"') : '') + '></div></div>';
       str += '<div class="col close-col"><a><i class="iconfont icon-close-circle-fill"></i></a></div>';
       str += '</div>';
       li.innerHTML = str;
-      this._editCards.traffic.appendChild(li);
-      var _trafficDels = _Dom.$('.close-col a', this._editCards.traffic);
+      this.trafficUl.appendChild(li);
+      var _trafficDels = _Dom.$('.close-col a', this.trafficUl);
       _trafficDels[_trafficDels.length - 1].addEventListener('click', function(_el) {
         me.delTraffic(_el.target.parentNode.parentNode.parentNode.parentNode);
       });
@@ -232,7 +237,7 @@ var Edit = (function() {
     //批量绑定 交通删除
     batchBindTrafficEvent: function() {
       var me = this;
-      var _trafficDels = _Dom.$('.close-col a', this._editCards.traffic);
+      var _trafficDels = _Dom.$('.close-col a', this.trafficUl);
       for (var i = 0; i < _trafficDels.length; i++) {
         _trafficDels[i].addEventListener('click', function(_el) {
           me.delTraffic(_el.target.parentNode.parentNode.parentNode.parentNode);
@@ -242,7 +247,7 @@ var Edit = (function() {
     // 删除交通
     delTraffic: function(_el) {
       console.log(_el);
-      this._editCards.traffic.removeChild(_el);
+      this.trafficUl.removeChild(_el);
     },
     // 交通 END
     // 住宿 START
@@ -330,14 +335,14 @@ var Edit = (function() {
       var me = this;
       var li = document.createElement('li');
       var str = '<div class="row">';
-      str += '<div class="col"><div class="input-container content"><input type="text"' + (data ? (' value="' + data.content + '"') : '') + '></div></div>';
+      str += '<div class="col"><div class="input-container content"><input type="text" placeholder="招待方式"' + (data ? (' value="' + data.content + '"') : '') + '></div></div>';
       str += '<div class="col"><div class="input-container number official"><input type="number"' + (data ? (' value="' + data.official + '"') : '') + '></div></div>';
       str += '<div class="col"><div class="input-container number total"><input type="number"' + (data ? (' value="' + data.total + '"') : '') + '></div></div>';
       str += '<div class="col close-col"><a><i class="iconfont icon-close-circle-fill"></i></a></div>';
       str += '</div>';
       li.innerHTML = str;
-      this._editCards.cost.appendChild(li);
-      var _costDels = _Dom.$('.close-col a', this._editCards.cost);
+      this.costUl.appendChild(li);
+      var _costDels = _Dom.$('.close-col a', this.costUl);
       _costDels[_costDels.length - 1].addEventListener('click', function(_el) {
         me.delCost(_el.target.parentNode.parentNode.parentNode.parentNode);
       });
@@ -345,7 +350,7 @@ var Edit = (function() {
     //批量绑定 花销删除
     batchBindStayEvent: function() {
       var me = this;
-      var _costDels = _Dom.$('.close-col a', this._editCards.cost);
+      var _costDels = _Dom.$('.close-col a', this.costUl);
       for (var i = 0; i < _costDels.length; i++) {
         _costDels[i].addEventListener('click', function(_el) {
           me.delCost(_el.target.parentNode.parentNode.parentNode.parentNode);
@@ -355,7 +360,7 @@ var Edit = (function() {
     // 删除花销
     delCost: function(_el) {
       console.log(_el);
-      this._editCards.cost.removeChild(_el);
+      this.costUl.removeChild(_el);
     },
     // 花销 END
     save: function(state) {
@@ -380,13 +385,14 @@ var Edit = (function() {
           list: []
         }
       };
-      var _traffics = _Dom.$('li:not(.head-li)', this._editCards.traffic);
+      var _traffics = _Dom.$('li:not(.head-li)', this.trafficUl);
       for (var i = 0; i < _traffics.length; i++) {
         var li = _traffics[i];
         var tmp = {
           vehicle: _Dom.$('.vehicle input', li)[0].value || '',
           official: _Dom.$('.official input', li)[0].value || 0,
-          total: _Dom.$('.total input', li)[0].value || 0
+          total: _Dom.$('.total input', li)[0].value || 0,
+          mark: _Dom.$('.mark input', li)[0].value || 0,
         };
         params.official += Number(tmp.official);
         params.total += Number(tmp.total);
@@ -399,7 +405,7 @@ var Edit = (function() {
       params.stay.contrast = Number(params.stay.official) - Number(params.stay.total);
       params.official += Number(params.stay.official);
       params.total += Number(params.stay.total);
-      var _cost = _Dom.$('li:not(.head-li)', this._editCards.cost);
+      var _cost = _Dom.$('li:not(.head-li)', this.costUl);
       console.log(_cost);
       for (var j = 0; j < _cost.length; j++) {
         var costLi = _cost[j];
@@ -419,8 +425,10 @@ var Edit = (function() {
       console.log('存储参数>>>>', params);
       Data.saveData(params);
       Data.addBasicHotel(this.hotelList);
+      _Dom.tip('success', 1000);
       if (state === 'add') {
         this.date = _Dom.calDate(new Date(this.date), 1);
+        this.setDateShow();
         this.initData('init');
       } else {
         this.close();
@@ -428,6 +436,7 @@ var Edit = (function() {
     },
     del: function() {
       Data.delData(this.date);
+      _Dom.tip('del', 1000);
       this.close();
     },
     fresh: function() {

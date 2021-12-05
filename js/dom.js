@@ -8,6 +8,14 @@ var _Dom = {
       return _parent.querySelectorAll(_el);
     }
   },
+  show: function(_el) {
+    console.log(_el);
+    _el.style.display = 'block';
+  },
+  hide: function(_el) {
+    console.log(_el);
+    _el.style.display = 'none';
+  },
   addClass: function(el, className) {
     var newClass = el.className.split(' ');
     var find = newClass.findIndex(function(name) {
@@ -56,5 +64,31 @@ var _Dom = {
     if ('vibrate' in window.navigator) {
       window.navigator.vibrate([200, 100, 200]);
     } else {}
+  },
+  tip: function(_type, time) {
+    var me = this;
+    var tipContainer = document.createElement('div');
+    _Dom.addClass(tipContainer, 'tip-container');
+    _Dom.addClass(tipContainer, _type);
+    var tip = document.createElement('div');
+    _Dom.addClass(tip, 'tip');
+    switch (_type) {
+      case 'success':
+        tip.innerHTML = '<i class="iconfont icon-check-circle"></i><span>保存成功！</span>';
+        break;
+      case 'del':
+        tip.innerHTML = '<i class="iconfont icon-close-circle"></i><span>删除成功！</span>';
+        break;
+      default:
+        break;
+    }
+    if (time) {
+      tip.style = 'animation: tipShow ' + time / 1000 + 's';
+    }
+    tipContainer.appendChild(tip);
+    document.body.appendChild(tipContainer);
+    window.setTimeout(function() {
+      _Dom.hide(tipContainer);
+    }, time);
   }
 };

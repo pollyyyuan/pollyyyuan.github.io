@@ -14,6 +14,7 @@
  *      arrive: @到达地,
  *      list:[{
  *         vehicle:@交通工具,
+ *         mark:@备注,
  *         official:@报销金额,
  *         total:@实际金额,
  *         contrast:@对比
@@ -119,15 +120,15 @@ var Data = {
       if (idx > -1) {
         list.splice(idx, 1, data);
       } else {
-        idx = 0;
-        for (var i = 0; i < list.length; i++) {
-          var tmpMonth = new Date(list[i].date).getMonth() + 1;
-          if (month < tmpMonth) {
-            idx = i;
-            break;
+        list.push(data);
+        list = list.sort(function(a, b) {
+          if (a.date < b.date) {
+            return 1;
+          } else {
+            return -1;
           }
-        }
-        list.splice(idx, 0, data);
+        });
+        console.log(list);
       }
       this.save('_limemo_data_' + month, list);
     } else {
