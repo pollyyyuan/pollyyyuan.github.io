@@ -156,6 +156,7 @@ var Data = {
     return tmp || {};
   },
   save: function(key, data) {
+    console.log(key);
     localStorage[key] = JSON.stringify(data);
   },
   get: function(key) {
