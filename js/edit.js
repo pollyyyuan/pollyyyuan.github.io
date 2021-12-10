@@ -3,9 +3,9 @@ var Edit = (function() {
   function Edit() {
     this.today = _Dom.formatDate(new Date());
 
-    this.hotelList = [];
-
     this.date = '';
+
+    this.hotelList = [];
     this.hotel = '';
 
     this.headLiTemplate = '<li class="head-li"><div class="row"><div class="col"></div><div class="col">(报销)</div><div class="col">(实际)</div><div class="col close-col"></div></div></li>';
@@ -18,22 +18,29 @@ var Edit = (function() {
     // 初始化数据
     this.currentTab = '交通';
     this.switchTab();
-
-    this.getHotelList();
   }
   Edit.prototype = {
     // 初始化
     init: function(home, editPopup, date) {
+      var me = this;
       this.home = home;
       this._editPopup = editPopup;
 
       this.date = date || this.today;
       this.setDateShow();
 
+      this._tag = new Tag(this._editHotelGroup, '', function(result) {
+        me.hotelList = result.tagList;
+        me.hotel = result.selected;
+      });
+      this.getCityPrice();
+      this.getHotelList();
+
       this.initData();
     },
     //绑定DOM
     bindDom: function() {
+      var me = this;
       this._editPage = _Dom.$('#editPage');
       this._editCloseBtn = _Dom.$('#editCloseBtn');
       this._editSaveBtn = _Dom.$('#editSaveBtn');
@@ -79,6 +86,7 @@ var Edit = (function() {
       this._editDelBtn = _Dom.$('#editDelBtn');
 
       this._trafficCard = _Dom.$('#trafficCard');
+
     },
     //绑定事件
     bindEvent: function() {
@@ -103,6 +111,12 @@ var Edit = (function() {
       }
       this._trafficAddBtn.addEventListener('click', function() {
         me.addTraffic();
+      });
+      this._arrive.addEventListener('blur', function(_el) {
+        var price = me.cityPrice[_el.target.value];
+        if (price) {
+          me._stayOfficial.value = price;
+        }
       });
       for (var j = 0; j < this._inputs.length; j++) {
         // this._inputs[j].addEventListener('keyup', function() {
@@ -144,7 +158,7 @@ var Edit = (function() {
         }
         if (tmp.stay && tmp.stay.hotel) {
           this.hotel = tmp.stay.hotel;
-          this.switchHotel();
+          this._tag.select(this.hotel);
         }
         if (tmp.cost && tmp.cost.list.length > 0) {
           for (var j = 0; j < tmp.cost.list.length; j++) {
@@ -158,12 +172,13 @@ var Edit = (function() {
     },
     close: function() {
       var me = this;
+      this._tag = null;
       _Dom.delClass(this._editPopup, 'show');
       window.setTimeout(function() {
         _Dom.vibrate();
         _Dom.hide(me._editPopup);
-        this.home.setCalendarSelected();
-        this.home.getDataList();
+        me.home.setCalendarSelected();
+        me.home.getDataList();
       }, 300);
     },
     // 日期 START
@@ -225,7 +240,7 @@ var Edit = (function() {
       str += '<div class="col close-col"></div>';
       str += '</div><div class="row">';
       str += '<div class="col"><div class="input-container mark"><input type="text" placeholder="备注"' + (data ? (' value="' + data.mark + '"') : '') + '></div></div>';
-      str += '<div class="col close-col"><a><i class="iconfont icon-close-circle-fill"></i></a></div>';
+      str += '<div class="col close-col"><a class="icon-del active"><i class="iconfont icon-close-circle-fill"></i></a></div>';
       str += '</div>';
       li.innerHTML = str;
       this.trafficUl.appendChild(li);
@@ -255,90 +270,19 @@ var Edit = (function() {
     getHotelList: function() {
       var me = this;
       this.hotelList = Data.getBasicHotel();
-      this.clearHotel();
-      for (var i = 0; i < this.hotelList.length; i++) {
-        var val = this.hotelList[i];
-        this.addHotel(val, 'init');
-      }
-      this._hotels = _Dom.$('.tag:not(.input-container)', this._editHotelGroup);
-      for (var j = 0; j < this._hotels.length; j++) {
-        this._hotels[j].addEventListener('click', function(_el) {
-          if (me.hotel === _el.target.innerHTML) {
-            me.hotel = '';
-            _Dom.delClass(_el.target, 'selected');
-          } else {
-            me.hotel = _el.target.innerHTML;
-            me.switchHotel();
-          }
-        });
-      }
-
-      this._hotelInput = _Dom.$('.input-container input', this._editHotelGroup)[0];
-      this._hotelInput.addEventListener('blur', function(_el) {
-        me.customHotel(_el.target.value);
-      });
-    },
-    // 新增酒店
-    addHotel: function(val, state) {
-      var me = this;
-      if (!val) return;
-      var div = document.createElement('div');
-      div.className = 'tag';
-      div.innerHTML = val;
-      var last = this._editHotelGroup.lastChild;
-      this._editHotelGroup.insertBefore(div, last);
-      if (state === 'custom') {
-        this._hotels = _Dom.$('.tag:not(.input-container)', this._editHotelGroup);
-        this._hotels[this._hotels.length - 1].addEventListener('click', function(_el) {
-          me.hotel = _el.target.innerHTML;
-          me.switchHotel();
-        });
-      }
-    },
-    // 切换酒店
-    switchHotel: function() {
-      var me = this;
-      for (var i = 0; i < this._hotels.length; i++) {
-        var _el = this._hotels[i];
-        if (_el.innerHTML === this.hotel) {
-          _Dom.addClass(_el, 'selected');
-        } else {
-          _Dom.delClass(_el, 'selected');
-        }
-      }
-    },
-    // 清空酒店DOM
-    clearHotel: function() {
-      this._editHotelGroup.innerHTML = '<div class="tag input-container"><input type="text" placeholder="自定义"></div>';
-    },
-    // 自定义酒店
-    customHotel: function(val) {
-      var me = this;
-      if (val) {
-        var find = this.hotelList.findIndex(function(check) {
-          return check === val;
-        });
-        if (find === -1) {
-          me.addHotel(val, 'custom');
-          me.hotel = val;
-          me.switchHotel();
-          this.hotelList.push(val);
-        }
-        this._hotelInput.value = '';
-      }
+      this._tag.addTagGroup(this.hotelList);
     },
     // 住宿 END
     // 花销 START
     // 新增花销
     addCost: function(data) {
-      console.log('addCost');
       var me = this;
       var li = document.createElement('li');
       var str = '<div class="row">';
       str += '<div class="col"><div class="input-container content"><input type="text" placeholder="招待方式"' + (data ? (' value="' + data.content + '"') : '') + '></div></div>';
       str += '<div class="col"><div class="input-container number official"><input type="number"' + (data ? (' value="' + data.official + '"') : '') + '></div></div>';
       str += '<div class="col"><div class="input-container number total"><input type="number"' + (data ? (' value="' + data.total + '"') : '') + '></div></div>';
-      str += '<div class="col close-col"><a><i class="iconfont icon-close-circle-fill"></i></a></div>';
+      str += '<div class="col close-col"><a class="icon-del active"><i class="iconfont icon-close-circle-fill"></i></a></div>';
       str += '</div>';
       li.innerHTML = str;
       this.costUl.appendChild(li);
@@ -363,6 +307,9 @@ var Edit = (function() {
       this.costUl.removeChild(_el);
     },
     // 花销 END
+    getCityPrice: function() {
+      this.cityPrice = Data.getCityPrice();
+    },
     save: function(state) {
       var params = {
         date: this.date,
@@ -373,6 +320,9 @@ var Edit = (function() {
         traffic: {
           leave: this._leave.value || '',
           arrive: this._arrive.value || '',
+          official: 0,
+          total: 0,
+          contrast: 0,
           list: []
         },
         stay: {
@@ -382,6 +332,9 @@ var Edit = (function() {
           contrast: 0
         },
         cost: {
+          official: 0,
+          total: 0,
+          contrast: 0,
           list: []
         }
       };
@@ -394,14 +347,15 @@ var Edit = (function() {
           total: _Dom.$('.total input', li)[0].value || 0,
           mark: _Dom.$('.mark input', li)[0].value || 0,
         };
-        params.official += Number(tmp.official);
-        params.total += Number(tmp.total);
+        params.traffic.official += Number(tmp.official);
+        params.traffic.total += Number(tmp.total);
         console.log(tmp);
         tmp.contrast = Number(tmp.official) - Number(tmp.total);
         if (tmp.vehicle && (tmp.official || tmp.total)) {
           params.traffic.list.push(tmp);
         }
       }
+      params.traffic.contrast = Number(params.traffic.official) - Number(params.traffic.total);
       params.stay.contrast = Number(params.stay.official) - Number(params.stay.total);
       params.official += Number(params.stay.official);
       params.total += Number(params.stay.total);
@@ -415,12 +369,15 @@ var Edit = (function() {
           total: _Dom.$('.total input', costLi)[0].value || 0
         };
         costTmp.contrast = Number(costTmp.official) - Number(costTmp.total);
-        params.official += Number(costTmp.official);
-        params.total += Number(costTmp.total);
+        params.cost.official += Number(costTmp.official);
+        params.cost.total += Number(costTmp.total);
         if (costTmp.content && (costTmp.official || costTmp.total)) {
           params.cost.list.push(costTmp);
         }
       }
+      params.cost.contrast = Number(params.cost.official) - Number(params.cost.total);
+      params.official = params.traffic.official + params.stay.official + params.cost.official;
+      params.total = params.traffic.total + params.stay.total + params.cost.total;
       params.contrast = Number(params.official) - Number(params.total);
       console.log('存储参数>>>>', params);
       Data.saveData(params);
@@ -436,7 +393,7 @@ var Edit = (function() {
     },
     del: function() {
       Data.delData(this.date);
-      _Dom.tip('del', 1000);
+      _Dom.tip('success', 1000);
       this.close();
     },
     fresh: function() {

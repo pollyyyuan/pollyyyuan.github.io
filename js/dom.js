@@ -2,7 +2,6 @@
 var _Dom = {
   $: function(_el, _parent) {
     if (_el.indexOf('#') > -1) {
-      console.log(document.getElementById(_el.substring(1)));
       return document.getElementById(_el.substring(1));
     } else {
       return _parent.querySelectorAll(_el);
@@ -65,7 +64,7 @@ var _Dom = {
       window.navigator.vibrate([200, 100, 200]);
     } else {}
   },
-  tip: function(_type, time) {
+  tip: function(_type, time, content) {
     var me = this;
     var tipContainer = document.createElement('div');
     _Dom.addClass(tipContainer, 'tip-container');
@@ -78,6 +77,9 @@ var _Dom = {
         break;
       case 'del':
         tip.innerHTML = '<i class="iconfont icon-close-circle"></i><span>删除成功！</span>';
+        break;
+      case 'normal':
+        tip.innerHTML = '<span>' + content + '</span>';
         break;
       default:
         break;
