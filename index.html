@@ -12,15 +12,20 @@
 <body>
 	<div class="layout home-layout" id="homePage">
 		<header class="header">
+			<a class="btn icon-btn user-btn active" id="homeUserBtn"><i class="iconfont icon-user"></i></a>
 			<h1 class="title">小李备忘</h1>
-			<a class="btn btn-small add-btn" id="homeAddBtn">新增</a>
+			<a class="btn btn-small add-btn active" id="homeAddBtn">新增</a>
 		</header>
 		<div class="container">
 			<section class="section calendar-section">
 				<div class="tool-group">
-					<a class="btn icon-btn" id="homeSwitchDate1"><i class="iconfont icon-left"></i></a>
-					<a class="btn primary-btn" id="homeDate"></a>
-					<a class="btn icon-btn" id="homeSwitchDate2"><i class="iconfont icon-right"></i></a>
+					<a class="btn icon-btn active" id="homeSwitchDate1"><i class="iconfont icon-left"></i></a>
+					<div class="date-range">
+						<div class="date" id="homeStartDate"></div>
+						<div class="divide-line"></div>
+						<div class="date" id="homeEndDate"></div>
+					</div>
+					<a class="btn icon-btn active" id="homeSwitchDate2"><i class="iconfont icon-right"></i></a>
 				</div>
 				<div class="calendar-container" id="homeCalendar">
 					<div class="row weekend-row">
@@ -33,36 +38,48 @@
 				<div class="title-group">
 					<a class="btn title">统计</a>
 				</div>
-				<div class="total-container">
-					<ul id="homeTotalContainer">
-						<li class="head-li">
-							<div class="row">
-								<div class="col">日期</div>
-								<div class="col">报销</div>
-								<div class="col">实际</div>
-								<div class="col">对比</div>
-							</div>
-						</li>
-					</ul>
+				<div class="search-group">
+					<div class="tag-group" id="searchTagGroup">
+						<div class="tag">差旅</div>
+						<div class="tag">招待</div>
+					</div>
+					<div class="switch-group" id="searchSwitchGroup">
+						<div class="switch-container"></div>
+						<span>实际</span>
+					</div>
+				</div>
+				<div class="total-container" id="homeTotalContainer">
+					<div class="no-data">暂无数据！</div>
 				</div>
 			</section>
 		</div>
-		<footer class="footer" id="homeFooter">
-
+		<footer class="footer row total-footer" id="homeFooter">
+			<div class="num-group">
+				共 <span>0</span> 笔
+			</div>
+			<a class="btn icon-btn download-btn active"><i class="iconfont icon-cloud-download"></i></a>
+			<div class="col">
+				<div class="label">总计：</div>
+				<div class="price-wrap">
+				</div>
+				<div class="contrast">
+					<span>0</span>
+				</div>
+			</div>
 		</footer>
 	</div>
-	<div class="popup" id="editPopup">
+	<div class="popup vertical" id="editPopup">
 		<!-- 编辑 -->
 		<layout class="layout edit-layout" id="editPage">
 			<header class="header">
-				<a class="btn icon-btn close-btn" id="editCloseBtn"><i class="iconfont icon-close-circle-fill"></i></a>
-				<a class="btn btn-small save-btn" id="editSaveBtn">保存</a>
+				<a class="btn icon-btn close-btn active" id="editCloseBtn"><i class="iconfont icon-close-circle-fill"></i></a>
+				<a class="btn btn-small save-btn active" id="editSaveBtn">保存</a>
 			</header>
 			<div class="container" id="editContainer">
 				<section class="section date-section">
-					<a class="btn icon-btn" id="editSwitchDate1"><i class="iconfont icon-left"></i></a>
+					<a class="btn icon-btn active" id="editSwitchDate1"><i class="iconfont icon-left"></i></a>
 					<a class="btn primary-btn" id="editDate"></a>
-					<a class="btn icon-btn" id="editSwitchDate2"><i class="iconfont icon-right"></i></a>
+					<a class="btn icon-btn active" id="editSwitchDate2"><i class="iconfont icon-right"></i></a>
 				</section>
 				<section class="section title-section">
 					<div class="input-container">
@@ -127,19 +144,13 @@
 										</div>
 									</li> -->
 								</ul>
-								<a class="btn add-btn" id="trafficAddBtn"><i class="iconfont icon-plus"></i></a>
+								<a class="btn add-card-btn active" id="trafficAddBtn"><i class="iconfont icon-plus"></i></a>
 							</section>
 						</div>
 						<div class="card stay-card">
 							<div class="row">
 								<div class="label">酒店：</div>
 								<div class="tag-group">
-									<!-- <div class="tag selected">汉庭</div>
-									<div class="tag">全季</div>
-									<div class="tag">橘子</div> -->
-									<div class="tag input-container">
-										<input type="text" placeholder="自定义">
-									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -185,22 +196,74 @@
 										</div>
 									</li> -->
 								</ul>
-								<a class="btn add-btn" id="costAddBtn"><i class="iconfont icon-plus"></i></a>
+								<a class="btn add-card-btn active" id="costAddBtn"><i class="iconfont icon-plus"></i></a>
 							</section>
 						</div>
 					</div>
 				</section>
 			</div>
 			<footer class="footer">
-				<a class="btn del-btn" id="editDelBtn">删除</a>
-				<a class="btn add-btn" id="editSaveBtn1">保存并新增下一笔</a>
+				<a class="btn del-btn active" id="editDelBtn">删除</a>
+				<a class="btn add-btn active" id="editSaveBtn1">保存并新增下一笔</a>
 			</footer>
+		</layout>
+	</div>
+	<div class="popup horizontal" id="userPopup">
+		<!-- 编辑 -->
+		<layout class="layout user-layout" id="userPage">
+			<header class="header">
+				<a class="btn icon-btn back-btn active" id="userBackBtn"><i class="iconfont icon-left"></i></a>
+				<h1 class="title">个人中心</h1>
+				<a class="btn btn-small default-btn active" id="userDefaultBtn">恢复默认</a>
+			</header>
+			<div class="container">
+				<div class="card">
+					<div class="row">
+						<span>每月起止日期</span>
+						<input type="number" id="userPointDate" />
+						<i>日</i>
+					</div>
+				</div>
+				<div class="card">
+					<div class="row">
+						<span>酒店常用</span>
+					</div>
+					<div class="tag-group show">
+					</div>
+				</div>
+				<div class="card">
+					<div class="row">
+						<span>当天出差补贴</span>
+						<input type="number" id="currentDayCost" />
+					</div>
+					<div class="row">
+						<span>过夜出差补贴</span>
+						<input type="number" id="crossDayCost" />
+					</div>
+				</div>
+				<div class="card">
+					<div class="row">
+						<span>城市住宿额度</span>
+					</div>
+					<div class="input-group" id="userCityInputGroup">
+					</div>
+					<a class="btn add-card-btn active" id="userCityAddBtn"><i class="iconfont icon-plus"></i></a>
+				</div>
+				<div class="card single del-card">
+					<a class="btn del-btn active" id="userDelBtn">清除所有数据</a>
+				</div>
+			</div>
+			<div class="footer">
+				<a class="btn add-btn active" id="userSaveBtn">保存</a>
+			</div>
 		</layout>
 	</div>
 </body>
 <script src="js/dom.js"></script>
 <script src="js/data.js"></script>
+<script src="js/tag.js"></script>
 <script src="js/edit.js"></script>
+<script src="js/user.js"></script>
 <script src="js/home.js"></script>
 <script>
 	//使用
