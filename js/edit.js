@@ -327,8 +327,8 @@ var Edit = (function() {
         },
         stay: {
           hotel: this.hotel || '',
-          official: this._stayOfficial.value || 0,
-          total: this._stayTotal.value || 0,
+          official: Number(this._stayOfficial.value || 0),
+          total: Number(this._stayTotal.value || 0),
           contrast: 0
         },
         cost: {
@@ -343,42 +343,41 @@ var Edit = (function() {
         var li = _traffics[i];
         var tmp = {
           vehicle: _Dom.$('.vehicle input', li)[0].value || '',
-          official: _Dom.$('.official input', li)[0].value || 0,
-          total: _Dom.$('.total input', li)[0].value || 0,
+          official: Number(_Dom.$('.official input', li)[0].value || 0),
+          total: Number(_Dom.$('.total input', li)[0].value || 0),
           mark: _Dom.$('.mark input', li)[0].value || 0,
         };
-        params.traffic.official += Number(tmp.official);
-        params.traffic.total += Number(tmp.total);
-        console.log(tmp);
-        tmp.contrast = Number(tmp.official) - Number(tmp.total);
+        params.traffic.official += tmp.official;
+        params.traffic.total += tmp.total;
+        tmp.contrast = tmp.official - tmp.total;
         if (tmp.vehicle && (tmp.official || tmp.total)) {
           params.traffic.list.push(tmp);
         }
       }
-      params.traffic.contrast = Number(params.traffic.official) - Number(params.traffic.total);
-      params.stay.contrast = Number(params.stay.official) - Number(params.stay.total);
-      params.official += Number(params.stay.official);
-      params.total += Number(params.stay.total);
+      params.traffic.contrast = params.traffic.official - params.traffic.total;
+      params.stay.contrast = params.stay.official - params.stay.total;
+      params.official += params.stay.official;
+      params.total += params.stay.total;
       var _cost = _Dom.$('li:not(.head-li)', this.costUl);
       console.log(_cost);
       for (var j = 0; j < _cost.length; j++) {
         var costLi = _cost[j];
         var costTmp = {
           content: _Dom.$('.content input', costLi)[0].value || '',
-          official: _Dom.$('.official input', costLi)[0].value || 0,
-          total: _Dom.$('.total input', costLi)[0].value || 0
+          official: Number(_Dom.$('.official input', costLi)[0].value || 0),
+          total: Number(_Dom.$('.total input', costLi)[0].value || 0)
         };
-        costTmp.contrast = Number(costTmp.official) - Number(costTmp.total);
-        params.cost.official += Number(costTmp.official);
-        params.cost.total += Number(costTmp.total);
+        costTmp.contrast = costTmp.official - costTmp.total;
+        params.cost.official += costTmp.official;
+        params.cost.total += costTmp.total;
         if (costTmp.content && (costTmp.official || costTmp.total)) {
           params.cost.list.push(costTmp);
         }
       }
-      params.cost.contrast = Number(params.cost.official) - Number(params.cost.total);
+      params.cost.contrast = params.cost.official - params.cost.total;
       params.official = params.traffic.official + params.stay.official + params.cost.official;
       params.total = params.traffic.total + params.stay.total + params.cost.total;
-      params.contrast = Number(params.official) - Number(params.total);
+      params.contrast = params.official - params.total;
       console.log('存储参数>>>>', params);
       Data.saveData(params);
       Data.addBasicHotel(this.hotelList);

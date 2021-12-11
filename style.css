@@ -256,7 +256,7 @@ html, body {
 
 .header .icon-btn {
   position: absolute;
-  top: 6px;
+  top: 8px;
   left: 10px;
   color: #1D1D1D;
 }
@@ -986,6 +986,10 @@ html, body {
 .user-layout .footer .add-btn {
   margin: 0 auto;
   width: 80%;
+}
+
+.user-layout .footer {
+  padding: 10px 5px 20px;
 }
 
 /* user end */
