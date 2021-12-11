@@ -72,6 +72,8 @@ var Home = (function() {
       // 绑定事件
       this.bindEvent();
 
+      this.addWeekend();
+
       this.initDate();
 
       this.totalSearch.type = '差旅';
@@ -175,7 +177,6 @@ var Home = (function() {
       this.date.year = new Date(this.today).getFullYear();
       this.date.month = new Date(this.today).getMonth() + 1;
       this.calDateRange();
-      this.addWeekend();
       this.addCalendar();
       this.setCalendarSelected();
     },
@@ -230,6 +231,7 @@ var Home = (function() {
     },
     // 新增日历头
     addWeekend: function() {
+      this._homeWeekend.innerHTML = '';
       for (var i = 0; i < this.Weekends.length; i++) {
         var tmp = this.Weekends[i];
         var div = document.createElement('div');
