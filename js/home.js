@@ -379,8 +379,8 @@ var Home = (function() {
       for (var i = 0; i < this.totalList.length; i++) {
         var data = this.totalList[i];
         var result = this.addTotal(data);
-        this.totalRes.official += (result.official || 0);
-        this.totalRes.total += (result.total || 0);
+        this.totalRes.official += Number(result.official || 0);
+        this.totalRes.total += Number(result.total || 0);
       }
       this.batchBindTotalEvent();
       this.totalRes.contrast = this.totalRes.official - this.totalRes.total;
@@ -397,11 +397,11 @@ var Home = (function() {
       _Dom.addClass(div, 'card');
       var str = '<div class="date-tag">' + data.date + '</div>';
       if (this.totalSearch.type !== '招待') {
-        official += data.traffic.official || 0;
-        official += data.stay.official || 0;
+        official += Number(data.traffic.official || 0);
+        official += Number(data.stay.official || 0);
         if (this.totalSearch.contrast) {
-          total += data.traffic.total || 0;
-          total += data.stay.total || 0;
+          total += Number(data.traffic.total || 0);
+          total += Number(data.stay.total || 0);
         }
         str += '<div class="row"><div class="col"><div class="label">事由：</div>';
         str += '<div class="text">' + data.work + '</div></div></div>';
@@ -417,9 +417,9 @@ var Home = (function() {
         str += '</div></div>';
         str += '<div class="row"><div class="col"><div class="label">交通工具：</div><div class="text wrap">';
         if (data.traffic && data.traffic.list && data.traffic.list.length > 0) {
-          official += data.cost.official || 0;
+          official += Number(data.cost.official || 0);
           if (this.totalSearch.contrast) {
-            total += data.cost.total || 0;
+            total += Number(data.cost.total || 0);
           }
           for (var i = 0; i < data.traffic.list.length; i++) {
             var traffic = data.traffic.list[i];
